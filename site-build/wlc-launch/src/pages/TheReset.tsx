@@ -139,7 +139,7 @@ export default function TheReset() {
                     { label: "Travel", value: "Included within LA" },
                     { label: "Supplies and tools", value: "Included" },
                     { label: "Cancellation", value: "48-hour notice" },
-                    { label: "Payment due", value: "At booking" },
+                    { label: "Payment due", value: "At time of service" },
                     { label: "Accepted methods", value: "Venmo · Zelle · Check · Card" },
                   ].map((row, i) => (
                     <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "0.85rem 0", borderBottom: "1px solid var(--warm-gray-lt)", fontSize: "0.9rem" }}>
@@ -169,7 +169,7 @@ export default function TheReset() {
           </FadeUp>
           <div style={{ maxWidth: 720 }}>
             {[
-              { q: "What can realistically be accomplished in four hours?", a: "More than most people expect. A focused four-hour session can completely transform a closet, a kitchen, an office, or a single problem room. The key is that I'm working, not planning. I start when I arrive." },
+              { q: "What can realistically be accomplished in four hours?", a: "More than most people expect. A focused four-hour session can get a closet, a kitchen, an office, or a single problem room back to fully functional. The key is that I'm working, not planning. I start when I arrive." },
               { q: "Do I need to be home?", a: "You can be home or not — it's genuinely up to you. Some clients prefer to be present for the decision-making; others prefer to leave and come back to a finished space. I'll confirm what works best before I arrive." },
               { q: "What if four hours isn't enough?", a: "I'm not billing by the minute. If I'm 15 minutes from something great, I finish it. If it's a full hour away, I'll have a quick conversation about what makes sense — extend at the hourly rate or schedule a follow-up." },
               { q: "What about things I can't just throw away — electronics, batteries, old medications?", a: "There's a responsible process for everything. Electronics get wiped and routed to certified e-waste. Batteries, old devices, anything that can't go in the trash — I know where it goes and how to get it there. You don't have to figure that out." },

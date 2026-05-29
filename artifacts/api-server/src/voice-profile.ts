@@ -130,15 +130,28 @@ Not sure which one you've got? Send a photo. I'll point you to the right one bef
     valueRecoveryPhilosophy: `Not everything should be donated. Not everything should be sold. And not everything should be decided in a moment of pressure.
 
 This work creates thoughtful pathways for what remains useful, meaningful, insurable, valuable, or simply too important to leave to chance.`,
+
+    canonicalPillarDescriptions: {
+      theReset: `The Reset is the relief of the room. Not just the closet — the storage unit, the baby shower gifts still in boxes, the space that stopped working and is now just something you walk past. It can be any space. A four-hour working session: sort, edit, place, and route — starting the moment I arrive.`,
+
+      legacyInventory: `Legacy Inventory is the relief of the life in the hidden things. Most families don't know what they have until it's too late to ask. This work is the process of finding out — assigning value, story, and meaning to the things a life accumulates, and making a plan while there's still time to choose how it goes. Proactive or urgent. Room by room. Object by object.`,
+
+      houseCalls: `House Calls is the person you used to be able to call. The partner who kept track of all the passwords. The neighbor who knew who to hire. The best friend who just came over and figured it out with you. That is the role — practical, available, and capable. Anyone can book it: for yourself, for a parent, for someone who needs a person on the ground.`,
+
+      curatedResale: `Resale flows from everything else. Reset the closet and what you're editing out gets listed. Do Legacy work and the storage unit gets loaded and sold. Close out a move and you ship what you keep and sell the rest. It doesn't have to be its own separate project — it's already built into the other work. Commission-based, pickup included, platform-matched by category.`,
+    },
   },
 
   knownViolationsInBuild: [
-    "FAQ.tsx — 'completely transform a closet' (overpromise, not in voice)",
-    "FAQ.tsx confidentiality answer — 'their households' (internal/formal language)",
-    "FAQ.tsx + HouseCalls.tsx — 'I'm particularly thoughtful about this' (duplicated verbatim across two pages — a phrase this specific must be earned each time, not copied)",
-    "Home.tsx title tag — 'Household Stewardship' (formal, not the voice)",
-    "Home.tsx hero subhead doesn't match the locked vault hero ('One number, one person, one invoice')",
-    "'independent older adults' / 'older adults' repeated past the one-use budget",
+    // ── OPEN ──────────────────────────────────────────────────────────────────
+    "FAQ.tsx confidentiality answer — 'their households' (internal/formal language) — not yet fixed",
+    "'independent older adults' / 'older adults' — check against one-use budget; confirm budget is not exceeded",
+    // ── RESOLVED ──────────────────────────────────────────────────────────────
+    "FIXED: FAQ.tsx + TheReset.tsx — 'completely transform a closet' → rewritten to 'back to fully functional'",
+    "FIXED: FAQ.tsx + HouseCalls.tsx — floating 'I'm particularly thoughtful about this' duplicate removed from both",
+    "FIXED: Home.tsx title tag — 'Household Stewardship' removed",
+    "FIXED: HouseCalls.tsx + TheReset.tsx — 'Payment due: At booking' → 'At time of service'",
+    "FIXED: Home.tsx — Gayle attribution updated to 'Gayle Williams · Seattle Client'",
   ],
 
   annotatedExamples: [

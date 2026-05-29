@@ -57,7 +57,7 @@ export default function CuratedResalePillar() {
               Resale for the things still worth something — handled by someone who knows where each thing actually sells.
             </p>
             <p style={{ fontSize: "1rem", fontWeight: 300, color: "rgba(248,244,227,0.6)", lineHeight: 1.8, marginBottom: "2.5rem" }}>
-              Not everything belongs in a donation pile — but not everyone has the time, energy, or knowledge to research, photograph, list, ship, and coordinate resale themselves.
+              It flows from everything else. A Reset surfaces what you're editing out. Legacy work uncovers what has value sitting in storage. A move closeout routes what doesn't make the truck. The resale piece is already built into the other work — it doesn't have to be its own separate project.
             </p>
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
               <Link href="/contact" className="btn btn-sage">Schedule a Resale Pickup</Link>

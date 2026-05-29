@@ -41,10 +41,10 @@ export default function HouseCalls() {
             </div>
             <h1 className="display-lg" style={{ color: "var(--parchment)", marginBottom: "1.5rem" }}>The 2-Hour House Call</h1>
             <p style={{ fontSize: "1.15rem", fontWeight: 300, color: "rgba(248,244,227,0.75)", lineHeight: 1.75, marginBottom: "1.5rem" }}>
-              House Calls are designed for the operational side of life — the tasks, logistics, fixes, resets, and follow-through that tend to sit unfinished because they fall somewhere between categories.
+              There used to be a person you could call. Not a professional service — a person. The neighbor who knew who to hire. The partner who kept track of all the passwords. The friend who just came over and figured it out with you.
             </p>
             <p style={{ fontSize: "1.15rem", fontWeight: 300, color: "rgba(248,244,227,0.75)", lineHeight: 1.75, marginBottom: "2.5rem" }}>
-              This is not caregiving, cleaning, or "luxury concierge" theater. It's practical, real-world household support from someone observant, resourceful, and capable of helping life move forward again.
+              That is the role. Not caregiving, not cleaning, not luxury concierge theater. Practical, available, and capable — for the operational side of life that keeps piling up. Anyone can book it: for yourself, for a parent, for someone who needs a person on the ground.
             </p>
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center" }}>
               <Link href="/contact" className="btn btn-sage">Schedule a House Call</Link>

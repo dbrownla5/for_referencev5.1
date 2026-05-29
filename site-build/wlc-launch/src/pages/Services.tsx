@@ -33,8 +33,8 @@ const pillars = [
   {
     num: "02",
     name: "Legacy Planning & Inventory Catalog",
-    tagline: "The things inside the walls. Documented before they become a burden.",
-    description: "Creating clarity around the belongings, stories, and documents families should not lose track of — while there is still time to do it thoughtfully. Room by room. Object by object.",
+    tagline: "The relief of the life in the hidden things.",
+    description: "Most families don't know what they have until it's too late to ask. Legacy work is the process of finding out — assigning value, story, and meaning to the things a life accumulates, and making a plan while there's still time to choose how it goes. Proactive or urgent. Room by room. Object by object.",
     includes: ["Full-home photographic inventory", "Provenance and story documentation", "Valuation routing and appraisal coordination", "Distribution planning", "Archival material organization", "Estate transition support"],
     quickBook: null,
     pillarHref: "/legacy-planning",
@@ -42,8 +42,8 @@ const pillars = [
   {
     num: "03",
     name: "House Calls",
-    tagline: "For the things life leaves unfinished.",
-    description: "Hourly help for the everyday things that keep getting pushed to the bottom of the list. Setting up new tech. Coordinating vendors. Returns, donations, post-move settling. Whatever needs doing — by someone who actually enjoys figuring it out.",
+    tagline: "The person you used to be able to call.",
+    description: "There's a person everyone used to have — or used to be. The neighbor who knew who to hire. The partner who kept track of everything. The friend who just came over and sorted it out. House Calls is that person, available to book — for yourself, for a parent, for someone who needs a capable human on the ground.",
     includes: ["Technology setup and troubleshooting", "Home safety updates", "Vendor oversight and access days", "Donation and return routing", "Remote family check-ins and updates", "Event prep and post-event breakdown"],
     quickBook: { label: "The 2-Hour House Call", href: "/house-calls" },
     pillarHref: "/house-calls-pillar",
@@ -51,8 +51,8 @@ const pillars = [
   {
     num: "04",
     name: "Curated Resale & Consignment",
-    tagline: "Resale for the things still worth something — routed to where the right buyer actually lives.",
-    description: "Full-service resale for items with real second-market potential. Pickup, evaluation, platform matching, buyer communication, and proceeds sharing — without asking you to become a part-time reseller.",
+    tagline: "It flows from everything else.",
+    description: "A Reset surfaces what you're ready to part with. Legacy work uncovers what has real value sitting in storage. A move closeout routes what doesn't make the truck. The resale piece is already built into the other work — pickup, evaluation, and listing without asking you to become a part-time seller.",
     includes: ["Free pickup within service area", "Platform matching by item category", "Buyer communication and management", "Sales report and payout every 30 days from signing", "Donation rerouting for unsold items", "Designer, furniture, art, and clothing accepted"],
     quickBook: { label: "Fast Bag Fill", href: "/fast-bag-fill" },
     pillarHref: "/curated-resale-consignment",

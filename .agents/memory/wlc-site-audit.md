@@ -10,18 +10,35 @@ description: Results of Task #2 voice/brand audit against the full brand vault. 
 | `Home.tsx` usePageMeta title | "Household Stewardship" — banned phrase (vault §10) | → "Home Resets, House Calls, Resale · Los Angeles" |
 | `Home.tsx` Gayle attribution | "— Gayle · Seattle" — vault §23 locks homepage to full name | → "— Gayle Williams · Seattle Client" |
 | `FAQ.tsx` The Reset answer | "completely transform a closet" — "transform" banned (vault §10) | → "get a closet...back to fully functional" |
-| `FAQ.tsx` House Calls answer | "I'm particularly thoughtful about this" — floating claim, no operational grounding | → grounded rewrite referencing pace/independence |
-| `HouseCalls.tsx` FAQ answer | Verbatim duplicate of the "thoughtful" violation | → same grounded rewrite |
-| `HouseCalls.tsx` pricing table | "Payment due: At booking" — conflicts with body text "at time of service" | → "At time of service" |
+| `TheReset.tsx` FAQ answer | Same "completely transform" violation in the page's own FAQ copy | → "back to fully functional" |
+| `TheReset.tsx` pricing table | "Payment due: At booking" — same conflict as HouseCalls | → "At time of service" |
+| `FAQ.tsx` House Calls answer | "I'm particularly thoughtful about this" — floating claim, no operational grounding | → grounded rewrite |
+| `HouseCalls.tsx` FAQ answer | Verbatim duplicate of the "thoughtful" violation | → grounded rewrite |
+| `HouseCalls.tsx` pricing table | "Payment due: At booking" — conflicts with body text | → "At time of service" |
+
+## Voice pass (Dayna's pillar descriptions integrated)
+
+| Location | Before | After |
+|----------|--------|-------|
+| `Services.tsx` Pillar 02 tagline | "The things inside the walls. Documented before they become a burden." | "The relief of the life in the hidden things." |
+| `Services.tsx` Pillar 02 desc | Generic walkthrough | "Most families don't know what they have until it's too late to ask..." |
+| `Services.tsx` Pillar 03 tagline | "For the things life leaves unfinished." | "The person you used to be able to call." |
+| `Services.tsx` Pillar 03 desc | Hourly help catch-all | The neighbor/partner/friend framing |
+| `Services.tsx` Pillar 04 tagline | "Resale for the things still worth something — routed to where..." | "It flows from everything else." |
+| `Services.tsx` Pillar 04 desc | Full-service resale logistics | "A Reset surfaces what you're ready to part with. Legacy work uncovers..." |
+| `HouseCalls.tsx` hero | "observant, resourceful, and capable" | "There used to be a person you could call..." |
+| `CuratedResalePillar.tsx` hero p2 | "Not everything belongs in a donation pile..." | "It flows from everything else. A Reset surfaces..." |
+| `voice-profile.ts` canonicalCopy | No pillar descriptions | `canonicalPillarDescriptions` block with all 4 pillars |
 
 ## Clean (confirmed, no action)
 - Hero copy matches locked vault §11 exactly
 - Gayle full quote present in both Home.tsx and HouseCalls.tsx (not truncated)
 - Footer: only @thewelllivedcitizen + @thewelllivedcloset present (personal accounts absent)
 - Fast Bag Fill: 8-step flow, commission splits, 6-month check-in match vault §24
-- Services.tsx, Pricing.tsx, About.tsx: no violations found
+- Services.tsx Pillar 01 tagline "The relief of the room." — already matched Dayna's framing exactly
 
-## Pending (Dayna sign-off or future work)
-- About.tsx: Rachel Corwin @ Spruce not yet named — vault §09 says story not yet captured, §21 says she should be a credibility/vouch tag when ready
-- About.tsx: Dayna's last name appears as "Dayna Brown" in heading/eyebrow — vault §21 says last name can be used in professional contexts ("About Dayna Brown · Founder") which this is, so likely fine but worth confirming
-- Gayle reference budget: testimonial on homepage = use #1, HouseCalls = use #2. Budget is testimonial + max 2 additional references per vault §21/§23. Currently at capacity — no new Gayle references should be added without retiring one.
+## Open (not yet fixed)
+- `FAQ.tsx` confidentiality answer — "their households" (formal/internal language) — still in file
+- `'older adults'` — check against one-use budget; confirm not over-referenced
+- About.tsx: Rachel Corwin @ Spruce not yet named (vault §09/§21 — story not yet captured)
+- Gayle reference budget: homepage = #1, HouseCalls = #2. At capacity — no new references without retiring one.

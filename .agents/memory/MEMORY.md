@@ -1,2 +1,2 @@
-- [WLC site audit findings](wlc-site-audit.md) — all 5 violations fixed; what was clean; what still needs Dayna's sign-off
+- [WLC site audit findings](wlc-site-audit.md) — violations fixed (7 total); 2 still open; pillar voice pass complete
 - [WLC brand vault rules](wlc-brand-vault-rules.md) — key enforcement rules distilled from 564-line vault for fast future checks
