@@ -1,2 +1,2 @@
-- [WLC site audit findings](wlc-site-audit.md) — violations fixed (7 total); 2 still open; pillar voice pass complete
+- [WLC site audit rules](wlc-site-audit.md) — permanent banned phrases, budget decisions, and voice dump protocol for WLC site work
 - [WLC brand vault rules](wlc-brand-vault-rules.md) — key enforcement rules distilled from 564-line vault for fast future checks

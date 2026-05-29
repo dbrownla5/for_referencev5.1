@@ -46,7 +46,7 @@ const faqSections = [
     items: [
       { q: "What's the difference between a House Call and The Reset?", a: "The Reset is a focused session for a single space or problem area. House Calls are flexible, hourly sessions for the broader running-the-household stuff — technology, home safety, errands, vendor coordination, transitions, and whatever else needs attention. House Calls have a 2-hour minimum." },
       { q: "Can I book recurring House Calls?", a: "Yes. Monthly retainer packages are available for clients who want consistent, scheduled support. These are priced individually based on frequency and scope. Ask about them during your call." },
-      { q: "Do you work with older adults?", a: "Yes. I work with older adults who want support maintaining their homes and their independence. The pace is set by the person, not me — and the goal is always to make the operational parts easier without getting in the way of how they already live." },
+      { q: "Do you work with older adults?", a: "Yes. I work with people who want support maintaining their homes and their independence. The pace is set by the person, not me — and the goal is always to make the operational parts easier without getting in the way of how they already live." },
     ]
   },
   {
@@ -79,7 +79,7 @@ const faqSections = [
       { q: "What areas do you serve?", a: "I'm based in Los Angeles and serve the greater LA area — West LA, Santa Monica, Hollywood, Silver Lake, Brentwood, Beverly Hills, Pasadena, and surrounding neighborhoods. For Legacy Inventory and specialized engagements, travel is available. Not sure if you're in my area? Reach out." },
       { q: "How do I pay?", a: "I accept Venmo, Zelle, check, and major credit cards. Payment is due at the time of service unless otherwise arranged. Retainer clients are billed monthly." },
       { q: "What's your cancellation policy?", a: "The Reset: 48-hour notice required. House Calls: 24-hour notice. Late cancellations may incur a fee equal to 50% of the session rate. I understand life happens — please just communicate. I'd rather you tell me you need to reschedule than push through something that isn't working." },
-      { q: "Is everything confidential?", a: "Yes. I treat everything I see in your home with complete discretion. I don't share details about clients, their households, or their belongings. Ever." },
+      { q: "Is everything confidential?", a: "Yes. I don't talk about clients, their homes, or what's inside them. What I see stays with me. Always." },
       { q: "Do you work with people in difficult or private situations?", a: "Yes. I absolutely work with people navigating difficult and private situations — leaving a hard place, managing a transition someone else can't face, or simply needing a trusted person to handle something you can't do yourself. I handle these on a case-by-case basis, always with safety and discretion for everyone involved. No one who reaches out is left without support." },
     ]
   },
