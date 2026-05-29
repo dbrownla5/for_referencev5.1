@@ -1,15 +1,16 @@
-# [Project name]
+# Resale / Estate Services Site
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A voice-consistent website and API for a Los Angeles-based resale, estate, and value recovery service. The owner's brand voice is the core product: human-first, business-always, never influencer-polished, never SEO-sanitized.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/api-server run dev` — run the API server (port 8080)
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
 - Required env: `DATABASE_URL` — Postgres connection string
+- Required env: `AI_INTEGRATIONS_OPENAI_BASE_URL` + `AI_INTEGRATIONS_OPENAI_API_KEY` — auto-provisioned via Replit AI Integrations
 
 ## Stack
 
@@ -17,28 +18,57 @@ _Replace the heading above with the project's name, and this line with one sente
 - API: Express 5
 - DB: PostgreSQL + Drizzle ORM
 - Validation: Zod (`zod/v4`), `drizzle-zod`
+- AI: OpenAI via Replit AI Integrations (gpt-5.4, no user API key needed)
 - API codegen: Orval (from OpenAPI spec)
 - Build: esbuild (CJS bundle)
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/api-server/src/voice-profile.ts` — the source-of-truth voice profile document (update this to retrain the voice tool)
+- `artifacts/api-server/src/routes/voice.ts` — `/api/voice/profile` and `/api/voice/analyze` endpoints
+- `lib/api-spec/openapi.yaml` — OpenAPI contract (source of truth for all API shapes)
+- `lib/api-client-react/src/generated/` — generated React Query hooks (do not edit manually)
+- `lib/api-zod/src/generated/` — generated Zod validation schemas (do not edit manually)
+
+## Voice Profile Summary
+
+The owner's voice is built on these structural moves:
+- **Triplet opener** — "Not everything should be X. Not everything should be Y. And not everything should be Z." — earns the pivot
+- **Commercial-emotional bridge** — business logic and human empathy land in the same sentence, never separated
+- **Discovery framing** — the client is paying to *uncover*, not just sort/donate/sell
+- **Lists as possibilities** — each bullet is something the reader hasn't thought to look for, not a feature inventory
+- **Short punctuation lines** — for emphasis, not style
+
+Anti-patterns the voice tool flags: SEO-speak, corporate sanitizer tone, internal business language in client-facing copy, lists as feature menus, framing the service as sorting when it's actually value recovery.
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Voice profile is a TypeScript object (not a DB table) — it's version-controlled, reviewable, and editable without a migration
+- OpenAI system prompt embeds the full voice profile + 5 annotated before/after examples at analysis time
+- `/api/voice/analyze` uses `gpt-5.4` with `response_format: { type: "json_object" }` for reliable structured output
+- Voice tool is API-only by design — it's a behind-the-scenes audit tool, not a user-facing feature
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+A service site for an LA-based resale, estate, and value recovery specialist. Services include:
+- Fast Bag Fill (resale pickup for active-market clothing/accessories)
+- Reset and House Call (full clean-out with donation handling)
+- Value recovery (uncovering unrealized resale value, insurance blind spots, collectibles, heirlooms, warranty recoveries)
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Voice: human-first, business-always — never influencer, never SEO-polished
+- The voice tool must analyze by pattern/rhythm/emotional architecture — not word lists
+- Launch post / promotional content is a separate project
+- SEO metadata is a separate pass
+- This is a voice pass only — no redesign, no structural changes to the site
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Run `pnpm --filter @workspace/api-spec run codegen` after any change to `lib/api-spec/openapi.yaml`
+- The voice profile is in `voice-profile.ts` — update it there and rebuild the server; no codegen needed
+- `AI_INTEGRATIONS_OPENAI_API_KEY` is a dummy string for SDK compatibility — the real auth is via `AI_INTEGRATIONS_OPENAI_BASE_URL`
+- API server runs on port 8080 (not 5000 as the default replit.md suggested)
 
 ## Pointers
 

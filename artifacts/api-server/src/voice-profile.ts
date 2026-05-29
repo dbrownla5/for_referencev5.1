@@ -10,6 +10,8 @@ export const voiceProfile = {
     "Short punchy lines land like punctuation. For emphasis. Not style.",
     "Never lectures. Illuminates, then steps back.",
     "Always finds the 'you know there is a way we can do this to make it...' angle",
+    "The client is paying to uncover — not just to sort, declutter, or hand off",
+    "Commercial value and emotional value are the same bridge, not separate lanes",
   ],
 
   rhythmPatterns: [
@@ -18,6 +20,9 @@ export const voiceProfile = {
     "Short setup sentence. Then the real thing.",
     "Lists that build toward a point, not away from one",
     "Humor appears in specific, concrete details — never in generalities",
+    "Triplet opener: 'Not everything should be X. Not everything should be Y. And not everything should be Z.' — sets up a pivot to the real point",
+    "Philosophy statement → then the work that lives inside that philosophy",
+    "Lists as possibilities the reader hasn't thought to look for, not a feature inventory",
   ],
 
   antiPatterns: [
@@ -29,16 +34,21 @@ export const voiceProfile = {
     "Describing the service without acknowledging the emotional state behind needing it",
     "Making operational logic sound like moral judgment",
     "Using 'every item has potential :)' energy to soften a hard truth",
+    "Listing features instead of uncovering possibilities",
+    "Framing the service as sorting/organizing when the real value is discovery and recovery",
   ],
 
   emotionalArchitecture: {
-    rule: "Clients do not experience themselves as misusing a funnel. They experience themselves as overwhelmed, embarrassed, uncertain, ashamed, or worried they'll be judged. Operationally-neutral language can accidentally feel morally loaded.",
+    rule: "Clients do not experience themselves as misusing a funnel. They experience themselves as overwhelmed, embarrassed, uncertain, ashamed, or worried they'll be judged. Operationally-neutral language can accidentally feel morally loaded. The deeper truth: the client isn't just paying to sort — they're paying to uncover unrealized value they didn't know they had.",
     approach:
-      "Acknowledge the emotional reality first (even briefly), then route them clearly without making them feel like a failed antique mall applicant standing in fluorescent lighting.",
+      "Acknowledge the emotional reality first (even briefly), then route them clearly without making them feel like a failed antique mall applicant standing in fluorescent lighting. When introducing commercial value, lead with what they stand to discover — not what the service does.",
     strongPhrases: [
       "'you don't have to know what anything's worth, that's on me' — removes expertise burden, shame burden, fear of failing the test",
       "'gone and handled rather than sold' — identifies the real desire (relief, not resale)",
       "'this other service is a better fit' — reframes rejection as correct routing",
+      "'showing you what value you still have coming your way' — the commercial-emotional bridge: simultaneously a business case and an emotional reassurance",
+      "'Not everything should be donated. Not everything should be sold. And not everything should be decided in a moment of pressure.' — triplet opener that earns the pivot to the real work",
+      "'This work creates thoughtful pathways for what remains useful, meaningful, insurable, valuable, or simply too important to leave to chance.' — philosophy as service description",
     ],
   },
 
@@ -48,6 +58,9 @@ export const voiceProfile = {
     "Would a nervous, uncertain person feel seen by this — or processed?",
     "Is there a more honest version of this sentence that still works operationally?",
     "Does any phrase make the reader feel like an adversarial economic unit?",
+    "Is this framing the service as sorting — or as discovery?",
+    "Does this list reveal possibilities, or just describe features?",
+    "Is this a commercial bridge or a commercial wall? (bridge = emotional + practical landing together)",
   ],
 
   annotatedExamples: [
@@ -94,6 +107,36 @@ export const voiceProfile = {
         "Identifies the real desire, not the stated one",
         "Short lines create rhythm and recognition",
         "Client reads this and thinks 'yes, exactly'",
+      ],
+    },
+    {
+      context: "Value recovery / service philosophy opener",
+      bad: "We offer comprehensive estate and wardrobe management services including resale, donation coordination, and item categorization.",
+      bad_problems: [
+        "Lists what the service does, not what the client uncovers",
+        "No emotional entry point — reads like a services menu",
+        "Misses the entire value recovery framing",
+      ],
+      good: "Not everything should be donated. Not everything should be sold. And not everything should be decided in a moment of pressure.\n\nThis work creates thoughtful pathways for what remains useful, meaningful, insurable, valuable, or simply too important to leave to chance.",
+      good_strengths: [
+        "Triplet opener earns the pivot — each 'not everything' dismantles a false assumption before the real frame arrives",
+        "Philosophy statement does the work of a service description without sounding like one",
+        "Emotional safety + commercial possibility land in the same sentence",
+      ],
+    },
+    {
+      context: "Explaining what the client is actually paying for (value recovery)",
+      bad: "Our service includes item identification, valuation research, and resale channel recommendations.",
+      bad_problems: [
+        "Describes the process, not the discovery",
+        "Reads as a checklist of labor, not a promise of value",
+        "No emotional hook — doesn't land in the client's reality",
+      ],
+      good: "The client isn't just paying to sort. They're paying to uncover:\n\nunrealized resale value\ninsurance blind spots\ncollectible potential\nforgotten heirlooms\nwarranty recoveries\nrestoration opportunities\nhidden practical utility\nfuture-use assets already inside the home",
+      good_strengths: [
+        "Each bullet is a possibility the client hasn't thought to look for — not a feature",
+        "Commercial bridge: 'showing you what value you still have coming your way' frames the service as discovery, not labor",
+        "The list is emotionally charged — heirlooms, blind spots, forgotten things — these aren't inventory categories, they're life categories",
       ],
     },
   ],
