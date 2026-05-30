@@ -181,6 +181,22 @@ export const voiceProfile = {
       "Splitting into 'safe version' vs 'edge version' vs 'philosophy version' — it is ONE voice that scales from hero to pillars to booking; the voice IS the commercial advantage",
       "Memoir drift — beautiful paragraphs that forget to position",
     ],
+    heroFlowRule: {
+      rule: "CRITICAL hero principle (locked May 2026): the homepage hero must NOT name specific services (move, resale, storage unit, downsizing). Naming specifics makes people self-disqualify — a parent reads 'storage unit / move' and thinks 'not us, why would we hire her.' The hero is universal and ease-based: the promise is getting life back to ease, not surviving a crisis. Specifics belong LOWER, in the recognition bullets, where they read as an invitation ('if this is you') rather than a filter.",
+      heroVoice: "Dayna's real register, from her bio: chaos wrangler, professional problem solver, 'there's an easier way to do that,' making it easier to find your good pajamas. Capable, warm, dry. Never crisis, transition, or negativity as the entry emotion.",
+      lockedHero: "There's an easier way to do that.",
+      lockedSubheader: "One capable person for the things that quietly pile up at home and in life — sorted, set up, and handled, so everything feels easier to manage again.",
+      bannedFromHero: ["crisis", "transition", "downsizing", "storage unit", "the move", "ruining your week", "chaos (as the headline promise)"],
+      pageFlow: [
+        "1. Universal ease-based hero (no named services)",
+        "2. Recognition bullets — tight, concrete, 'if any of these sound familiar'; specifics live here as invitation",
+        "3. Bridge line: 'If any of these resonate, you're in the right place' → one capable person, not four services + a group text",
+        "4. Three Easy Ways to Start — low-commitment entry points (Reset, House Call, Fast Bag Fill)",
+        "5. Core Services below — the deeper project-level work",
+      ],
+      recognitionBulletRule: "Bullets are concrete and lightly universal — the unset-up phone/TV, the room that became a staging area, the closet of good things to sell, the move that never landed, the pile that needs to go somewhere thoughtfully, the pushed errands, 'you just haven't.' Each is something the reader recognizes without needing to be in distress. Keep them tight.",
+    },
+
     launchRestraint:
       "Launch is already basically done; it just needs restraint. Short, casual, controlled. DO NOT post ten graphics or a Canva quote carousel. One image: one lived-in photo, one room, one pile, one detail, one observant visual. The restraint IS the cool part — don't overperform the launch.",
   },

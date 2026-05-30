@@ -22,8 +22,8 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 
 export default function Home() {
   usePageMeta({
-    title: "The Well Lived Citizen — Home Resets, House Calls, Resale · Los Angeles",
-    description: "One person for the move, the resale, the storage unit, and the other thing currently ruining your week. Home resets, house calls, legacy inventory, and curated resale in greater Los Angeles.",
+    title: "The Well Lived Citizen — There's an Easier Way · Los Angeles",
+    description: "One capable person for the things that quietly pile up at home and in life — sorted, set up, and handled, so everything feels easier to manage again. Greater Los Angeles.",
     path: "/",
   });
   return (
@@ -46,7 +46,7 @@ export default function Home() {
                 letterSpacing: "-0.02em",
                 marginBottom: "2rem",
               }}>
-                One person for the move, the resale, the storage unit, and the other thing currently ruining your week.
+                There's an easier way to do that.
               </h1>
               <p style={{
                 fontSize: "clamp(0.95rem, 1.8vw, 1.15rem)",
@@ -56,7 +56,7 @@ export default function Home() {
                 marginBottom: "2.5rem",
                 maxWidth: 540,
               }}>
-                Because most people don't actually need four different services and a group text. They need someone capable who can see the whole picture and help life start moving again.
+                One capable person for the things that quietly pile up at home and in life — sorted, set up, and handled, so everything feels easier to manage again.
               </p>
               <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                 <Link href="/contact" className="btn btn-sage">Schedule a Call</Link>
@@ -96,37 +96,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── THE CONVERSATIONS IN BETWEEN ── */}
+      {/* ── IF ANY OF THESE RESONATE ── */}
       <section style={{ backgroundColor: "var(--parchment)", padding: "6.5rem 0" }}>
         <div className="container">
           <FadeUp>
-            <div style={{ maxWidth: 720 }}>
-              <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.85, marginBottom: "1.75rem" }}>
-                Google can help you find a mover, a home organizer, someone to list your designer clothes, a TaskRabbit, an estate sale company, or a guy named Mike with a truck.
-              </p>
-              <p style={{ fontSize: "1.05rem", fontWeight: 400, color: "var(--ink)", lineHeight: 1.85, marginBottom: "2rem" }}>
-                What it doesn't really cover are the conversations in between.
-              </p>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 2.5rem", borderLeft: "2px solid var(--sage)" }}>
+            <div style={{ maxWidth: 760 }}>
+              <span className="eyebrow eyebrow-sage">If any of these sound familiar</span>
+              <h2 className="display-md" style={{ color: "var(--ink)", maxWidth: 600, marginBottom: "2.5rem", marginTop: "0.5rem" }}>
+                You don't need a name for it. You just want it handled.
+              </h2>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 2.5rem", display: "grid", gap: "1px", backgroundColor: "var(--warm-gray-lt)", border: "1px solid var(--warm-gray-lt)" }}>
                 {[
-                  "“No, Mom, buying the iPhone is not the same thing as setting up the iPhone.”",
-                  "“I know the storage unit has a system. I’m just not sure anyone else understands it.”",
-                  "“Technically we moved months ago. We just never fully landed.”",
-                  "“We were supposed to clean out the garage after Dad passed. Then life kept happening.”",
-                  "“These things are probably worth selling. Realistically they’ve been sitting here for three years.”",
-                  "“I don’t need a full organizer. I need someone to help me deal with… all this.”",
-                  "“I can do it myself. I just… haven’t.”",
+                  "The new phone, laptop, or TV that came in the box and never got set up.",
+                  "The room that became a staging area and just… stayed that way.",
+                  "The closet full of good things you keep meaning to sell.",
+                  "The move that technically happened, but never fully landed.",
+                  "The pile of stuff that needs to go somewhere — thoughtfully, not in a panic.",
+                  "The errands, vendors, and little fixes that keep getting pushed to next week.",
+                  "The thing you could do yourself. You just… haven't.",
                 ].map((line, i) => (
-                  <li key={i} style={{ fontSize: "1rem", fontWeight: 300, fontStyle: "italic", color: "var(--ink-soft)", lineHeight: 1.6, padding: "0.55rem 0 0.55rem 1.5rem" }}>
+                  <li key={i} style={{ backgroundColor: "var(--parchment)", fontSize: "1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.6, padding: "1rem 1.25rem" }}>
                     {line}
                   </li>
                 ))}
               </ul>
-              <p style={{ fontSize: "1.05rem", fontWeight: 400, color: "var(--ink)", lineHeight: 1.85, marginBottom: "1rem" }}>
-                That's the space The Well Lived Citizen exists in. For the things that fall between categories. And the moments when life becomes quietly too operationally complicated to untangle alone.
+              <p style={{ fontSize: "1.05rem", fontWeight: 400, color: "var(--ink)", lineHeight: 1.85, marginBottom: "0.75rem" }}>
+                If any of these resonate, you're in the right place. Most people don't need four different services and a group text — they need one capable person who sees the whole picture and gets things moving again.
               </p>
-              <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.85 }}>
-                Because sometimes people don't need another platform or another vendor. They need one capable person who can see the whole picture and help life start moving again.
+              <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--sage-dark)", lineHeight: 1.85 }}>
+                Below are three easy ways to start right now. The deeper, project-level work is in Core Services further down. ↓
               </p>
             </div>
           </FadeUp>
@@ -137,10 +135,10 @@ export default function Home() {
       <section style={{ backgroundColor: "var(--parchment-mid)", padding: "6rem 0" }}>
         <div className="container">
           <FadeUp>
-            <span className="eyebrow eyebrow-sage">Where Most People Start</span>
-            <h2 className="display-md" style={{ color: "var(--ink)", maxWidth: 560, marginBottom: "0.75rem" }}>Three ways in.</h2>
+            <span className="eyebrow eyebrow-sage">Three Easy Ways to Start</span>
+            <h2 className="display-md" style={{ color: "var(--ink)", maxWidth: 560, marginBottom: "0.75rem" }}>Start small. Start today.</h2>
             <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--sage-dark)", maxWidth: 640, lineHeight: 1.85, marginBottom: "3.5rem" }}>
-              Book the one that matches what's actually in front of you.
+              No big project required. Pick the one that fits, and we'll take it from there.
             </p>
           </FadeUp>
 
