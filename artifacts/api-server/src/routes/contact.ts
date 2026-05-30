@@ -1,5 +1,7 @@
 import { Router, type IRouter } from "express";
 import { logger } from "../lib/logger";
+import { db, contactSubmissions } from "@workspace/db";
+import { dispatchWebhook } from "../lib/webhook";
 
 const router: IRouter = Router();
 
@@ -36,13 +38,40 @@ router.post("/contact", async (req, res) => {
     return;
   }
 
+  // System of record first: persist the submission so a lead is never lost,
+  // even if email is unconfigured or the CRM webhook is down.
+  try {
+    await db.insert(contactSubmissions).values({
+      name: body.name,
+      email: body.email,
+      phone: body.phone ?? null,
+      neighborhood: body.neighborhood ?? null,
+      clientType: body.clientType ?? null,
+      summary: body.summary ?? null,
+      situation: body.situation ?? null,
+      bagsCount: body.bagsCount ?? null,
+      urgency: body.urgency ?? null,
+      pickupTime1: body.pickupTime1 ?? null,
+      pickupTime2: body.pickupTime2 ?? null,
+      pickupMethod: body.pickupMethod ?? null,
+      pickupRelease: body.pickupRelease ?? false,
+      courierNotes: body.courierNotes ?? null,
+    });
+  } catch (err) {
+    logger.error({ err }, "Failed to persist contact submission");
+  }
+
+  // Forward to external CRM (no-op if WEBHOOK_URL unset).
+  void dispatchWebhook({ kind: "contact", ...body });
+
   const resendKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO || "dayna@thewelllivedcitizen.com";
   const from = process.env.CONTACT_FROM || "WLC Contact Form <onboarding@resend.dev>";
 
   if (!resendKey) {
-    logger.error("RESEND_API_KEY not set in environment");
-    res.status(500).json({ ok: false, error: "Email service not configured." });
+    // Not fatal anymore — the submission is already saved + forwarded.
+    logger.warn("RESEND_API_KEY not set; submission saved without email notification");
+    res.json({ ok: true, emailed: false });
     return;
   }
 
