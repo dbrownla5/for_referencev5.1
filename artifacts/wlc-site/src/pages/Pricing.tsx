@@ -118,6 +118,7 @@ export default function Pricing() {
                   "You agree to terms at intake, approve listings after evaluation",
                   "Custody transfers at pickup (in-person, UPS, or courier)",
                   "Commission split varies by category",
+                  "Low-value volume ($5–$10 range): 35% to you · reviewed at intake",
                   "Report and payout every 30 days from your consent",
                 ],
                 cta: "See Resale Details",

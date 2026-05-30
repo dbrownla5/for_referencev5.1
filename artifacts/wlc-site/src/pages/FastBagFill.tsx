@@ -201,6 +201,7 @@ export default function FastBagFill() {
                 {[
                   { label: "Clothing & Accessories", value: "45% to you / 55% WLC", note: "Standard resale items" },
                   { label: "Designer & Luxury", value: "50% to you / 50% WLC", note: "Designer handbags, luxury clothing" },
+                  { label: "Low-Value Volume", value: "35% to you / 65% WLC", note: "Primarily $5–$10 resale range · reviewed at intake, never applied retroactively" },
                   { label: "Pickup fee", value: "Free", note: "Within LA service area" },
                   { label: "Booking fee", value: "None", note: "No upfront cost" },
                   { label: "Monthly report", value: "Every 30 days", note: "Cycle starts at your consent" },

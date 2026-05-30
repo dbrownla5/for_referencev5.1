@@ -1,28 +1,122 @@
 import { Router, type IRouter } from "express";
-import { db } from "@workspace/db";
-import { contactSubmissions, insertContactSubmissionSchema } from "@workspace/db";
 import { logger } from "../lib/logger";
 
 const router: IRouter = Router();
 
+interface ContactPayload {
+  name?: string;
+  email?: string;
+  phone?: string;
+  neighborhood?: string;
+  clientType?: string;
+  summary?: string;
+  situation?: string;
+  bagsCount?: string;
+  urgency?: string;
+  pickupTime1?: string;
+  pickupTime2?: string;
+  pickupMethod?: string;
+  pickupRelease?: boolean;
+  courierNotes?: string;
+  agreementAccepted?: boolean;
+  estimatedItems?: string;
+}
+
+function isResalePath(body: ContactPayload): boolean {
+  if (body.bagsCount || body.pickupMethod) return true;
+  const s = (body.summary || "").toLowerCase();
+  return ["fast bag", "resale", "consignment", "pickup"].some(kw => s.includes(kw));
+}
+
 router.post("/contact", async (req, res) => {
-  const parse = insertContactSubmissionSchema.safeParse(req.body);
-  if (!parse.success) {
-    res.status(400).json({ ok: false, error: "Invalid submission." });
+  const body = req.body as ContactPayload;
+
+  if (!body.name || !body.email) {
+    res.status(400).json({ ok: false, error: "Name and email are required." });
     return;
   }
 
-  try {
-    const [row] = await db
-      .insert(contactSubmissions)
-      .values(parse.data)
-      .returning({ id: contactSubmissions.id });
+  const resendKey = process.env.RESEND_API_KEY;
+  const to = process.env.CONTACT_TO || "dayna@thewelllivedcitizen.com";
+  const from = process.env.CONTACT_FROM || "WLC Contact Form <onboarding@resend.dev>";
 
-    logger.info({ id: row?.id, name: parse.data.name, summary: parse.data.summary }, "Contact form submission received");
+  if (!resendKey) {
+    logger.error("RESEND_API_KEY not set in environment");
+    res.status(500).json({ ok: false, error: "Email service not configured." });
+    return;
+  }
+
+  const subject = `[WLC] ${body.summary || "General inquiry"} — ${body.name}`;
+
+  const lines = [
+    `New contact form submission`,
+    ``,
+    `Name: ${body.name}`,
+    `Email: ${body.email}`,
+    body.phone ? `Phone: ${body.phone}` : "",
+    body.neighborhood ? `Neighborhood: ${body.neighborhood}` : "",
+    body.clientType ? `Client type: ${body.clientType}` : "",
+    body.summary ? `Summary: ${body.summary}` : "",
+    ``,
+    `--- Their message ---`,
+    body.situation || "(none)",
+  ];
+
+  if (body.bagsCount || body.urgency || body.pickupTime1 || body.pickupTime2 || body.pickupMethod) {
+    lines.push("", "--- Pickup details (Fast Bag Fill) ---");
+    if (body.bagsCount) lines.push(`Bags: ${body.bagsCount}`);
+    if (body.estimatedItems) lines.push(`Estimated item count: ${body.estimatedItems}`);
+    if (body.urgency) lines.push(`Urgency: ${body.urgency}`);
+    if (body.pickupTime1) lines.push(`Pickup window 1: ${body.pickupTime1}`);
+    if (body.pickupTime2) lines.push(`Pickup window 2: ${body.pickupTime2}`);
+    if (body.pickupMethod) lines.push(`Pickup method: ${body.pickupMethod}`);
+    if (body.pickupMethod === "in-person") {
+      lines.push(`In-person release authorized: ${body.pickupRelease ? "Yes" : "No"}`);
+    }
+    if (body.pickupMethod === "courier" && body.courierNotes) {
+      lines.push(`Courier access notes: ${body.courierNotes}`);
+    }
+  }
+
+  if (isResalePath(body)) {
+    lines.push(
+      "",
+      "--- Agreement status ---",
+      `Resale Agreement accepted at intake: ${body.agreementAccepted ? "YES — client signed at booking" : "NOT CONFIRMED"}`,
+      "Resale Agreement: https://thewelllivedcitizen.com/WLC-Resale-Agreement.pdf",
+    );
+  }
+
+  const text = lines.filter(l => l !== undefined).join("\n");
+
+  try {
+    const emailRes = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${resendKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        reply_to: body.email,
+        subject,
+        text,
+      }),
+    });
+
+    if (!emailRes.ok) {
+      const errorBody = await emailRes.text();
+      logger.error({ errorBody }, "Resend API error");
+      res.status(500).json({ ok: false, error: "Email delivery failed." });
+      return;
+    }
+
+    logger.info({ name: body.name, summary: body.summary }, "Contact form submission sent via Resend");
     res.json({ ok: true });
   } catch (err) {
-    logger.error({ err }, "Failed to save contact submission");
-    res.status(500).json({ ok: false, error: "Something went wrong. Please try again." });
+    logger.error({ err }, "Contact form error");
+    res.status(500).json({ ok: false, error: "Unexpected error." });
   }
 });
 

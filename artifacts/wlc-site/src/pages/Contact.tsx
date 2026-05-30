@@ -94,7 +94,7 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const [form, setForm] = useState({ name: "", email: "", phone: "", neighborhood: "", situation: "", bagsCount: "", urgency: "", pickupTime1: "", pickupTime2: "", pickupMethod: "", pickupRelease: false, courierNotes: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", neighborhood: "", situation: "", bagsCount: "", urgency: "", pickupTime1: "", pickupTime2: "", pickupMethod: "", pickupRelease: false, courierNotes: "", agreementAccepted: false, estimatedItems: "" });
 
   function pick<T>(setter: (v: T) => void, val: T, next: 0 | 1 | 2 | 3) {
     setter(val);
@@ -163,6 +163,8 @@ export default function Contact() {
           pickupMethod: form.pickupMethod,
           pickupRelease: form.pickupRelease,
           courierNotes: form.courierNotes,
+          agreementAccepted: form.agreementAccepted,
+          estimatedItems: form.estimatedItems,
         }),
       });
       const data = await res.json() as { ok: boolean; error?: string };
@@ -224,13 +226,97 @@ export default function Contact() {
       {submitted ? (
         <section style={{ backgroundColor: "var(--parchment)", padding: "8rem 0" }}>
           <div className="container">
-            <div style={{ maxWidth: 540 }}>
-              <span className="eyebrow eyebrow-sage">Message Sent</span>
-              <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "1.5rem" }}>Thank you — I'll be in touch.</h2>
-              <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.8, marginBottom: "1rem" }}>
-                Got it — I'll be in touch within 24 hours.
-              </p>
-            </div>
+            {(serviceChoice === "fast-bag" || returningNeed === "bag-pickup") ? (
+              <div style={{ maxWidth: 580 }}>
+                <span className="eyebrow eyebrow-sage">You're on the calendar.</span>
+                <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "1.5rem" }}>Agreement signed. Pickup request received.</h2>
+                <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.8, marginBottom: "2rem" }}>
+                  I'll reach out within 24 hours to confirm the pickup window and lock in the logistics.
+                </p>
+
+                {/* Pickup details echo */}
+                <div style={{ backgroundColor: "var(--parchment-mid)", padding: "1.5rem", marginBottom: "1.5rem", borderLeft: "3px solid var(--sage)" }}>
+                  <p style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--sage-dark)", marginBottom: "1rem" }}>Your Pickup Details</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                    {form.bagsCount && (
+                      <div style={{ display: "flex", gap: "1rem", fontSize: "0.88rem" }}>
+                        <span style={{ fontWeight: 600, color: "var(--ink)", minWidth: 130 }}>Bags</span>
+                        <span style={{ fontWeight: 300, color: "var(--ink-soft)" }}>{form.bagsCount}</span>
+                      </div>
+                    )}
+                    {form.estimatedItems && (
+                      <div style={{ display: "flex", gap: "1rem", fontSize: "0.88rem" }}>
+                        <span style={{ fontWeight: 600, color: "var(--ink)", minWidth: 130 }}>Est. item count</span>
+                        <span style={{ fontWeight: 300, color: "var(--ink-soft)" }}>{form.estimatedItems}</span>
+                      </div>
+                    )}
+                    {form.urgency && (
+                      <div style={{ display: "flex", gap: "1rem", fontSize: "0.88rem" }}>
+                        <span style={{ fontWeight: 600, color: "var(--ink)", minWidth: 130 }}>Urgency</span>
+                        <span style={{ fontWeight: 300, color: "var(--ink-soft)" }}>{form.urgency}</span>
+                      </div>
+                    )}
+                    {form.pickupTime1 && (
+                      <div style={{ display: "flex", gap: "1rem", fontSize: "0.88rem" }}>
+                        <span style={{ fontWeight: 600, color: "var(--ink)", minWidth: 130 }}>Window 1</span>
+                        <span style={{ fontWeight: 300, color: "var(--ink-soft)" }}>{form.pickupTime1}</span>
+                      </div>
+                    )}
+                    {form.pickupTime2 && (
+                      <div style={{ display: "flex", gap: "1rem", fontSize: "0.88rem" }}>
+                        <span style={{ fontWeight: 600, color: "var(--ink)", minWidth: 130 }}>Window 2</span>
+                        <span style={{ fontWeight: 300, color: "var(--ink-soft)" }}>{form.pickupTime2}</span>
+                      </div>
+                    )}
+                    {form.pickupMethod && (
+                      <div style={{ display: "flex", gap: "1rem", fontSize: "0.88rem" }}>
+                        <span style={{ fontWeight: 600, color: "var(--ink)", minWidth: 130 }}>Method</span>
+                        <span style={{ fontWeight: 300, color: "var(--ink-soft)" }}>
+                          {form.pickupMethod === "in-person" && "In-person pickup"}
+                          {form.pickupMethod === "ups" && "UPS label"}
+                          {form.pickupMethod === "courier" && "Uber courier"}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  {form.pickupMethod === "ups" && (
+                    <p style={{ fontSize: "0.82rem", color: "var(--sage-dark)", marginTop: "1rem", lineHeight: 1.6 }}>
+                      You'll receive a prepaid UPS label via email before the pickup date.
+                    </p>
+                  )}
+                  {form.pickupMethod === "courier" && (
+                    <p style={{ fontSize: "0.82rem", color: "var(--sage-dark)", marginTop: "1rem", lineHeight: 1.6 }}>
+                      Courier details will be confirmed via text.
+                    </p>
+                  )}
+                </div>
+
+                {/* What comes next */}
+                <div style={{ border: "1.5px solid var(--warm-gray-lt)", padding: "1.5rem" }}>
+                  <p style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--sage-dark)", marginBottom: "0.75rem" }}>What happens next</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                    {[
+                      "I'll confirm your pickup window within 24 hours.",
+                      "After I receive the bags, I'll verify item count and send you the full inventory.",
+                      "Once evaluated, you'll get a proposed listing — every item, platform, and starting price.",
+                      "You'll have 24 hours to approve or pull any items. Once you approve, your 30-day cycle begins.",
+                    ].map((line, i) => (
+                      <div key={i} style={{ display: "flex", gap: "0.75rem", fontSize: "0.85rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.6 }}>
+                        <span style={{ color: "var(--sage)", fontWeight: 700, flexShrink: 0 }}>0{i + 1}</span>{line}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div style={{ maxWidth: 540 }}>
+                <span className="eyebrow eyebrow-sage">Message Sent</span>
+                <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "1.5rem" }}>Thank you — I'll be in touch.</h2>
+                <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.8, marginBottom: "1rem" }}>
+                  Got it — I'll be in touch within 24 hours.
+                </p>
+              </div>
+            )}
           </div>
         </section>
       ) : (
@@ -488,7 +574,7 @@ export default function Contact() {
                             <label style={{ display: "flex", gap: "0.6rem", alignItems: "flex-start", marginTop: "1rem", cursor: "pointer" }}>
                               <input type="checkbox" checked={form.pickupRelease} onChange={e => handleChange("pickupRelease", e.target.checked)} style={{ marginTop: "0.2rem" }} />
                               <span style={{ fontSize: "0.8rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.5 }}>
-                                I authorize release of items to The Well Lived Citizen at pickup. Possession transfers at handoff per the Resale Agreement.
+                                I authorize release of items to The Well Lived Citizen at pickup. Possession transfers at handoff.
                               </span>
                             </label>
                           )}
@@ -502,9 +588,39 @@ export default function Contact() {
                             </div>
                           )}
 
-                          <p style={{ fontSize: "0.72rem", color: "var(--sage-dark)", marginTop: "1rem", lineHeight: 1.5, opacity: 0.8 }}>
-                            Max 2 bags per pickup unless we've set up a session. By sending this, you're agreeing to the Resale Agreement terms — you'll review the full agreement before anything is listed.
-                          </p>
+                          <div style={{ marginTop: "1.25rem" }}>
+                            <label style={labelStyle}>Roughly how many items total?</label>
+                            <input type="text" value={form.estimatedItems} onChange={e => handleChange("estimatedItems", e.target.value)} style={inputStyle} placeholder="e.g. 20–30 pieces, mostly tops and dresses"
+                              onFocus={e => (e.target as HTMLInputElement).style.borderColor = "var(--sage)"}
+                              onBlur={e => (e.target as HTMLInputElement).style.borderColor = "var(--warm-gray-lt)"} />
+                            <p style={{ fontSize: "0.7rem", color: "var(--sage-dark)", marginTop: "0.4rem", lineHeight: 1.5 }}>
+                              A rough count is enough. I'll verify when I receive the bags.
+                            </p>
+                          </div>
+
+                          <div style={{ backgroundColor: "var(--parchment)", border: "1.5px solid var(--warm-gray-lt)", padding: "1.25rem", marginTop: "1.25rem" }}>
+                            <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--sage-dark)", marginBottom: "0.75rem" }}>
+                              Resale Agreement — Required
+                            </p>
+                            <p style={{ fontSize: "0.82rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.6, marginBottom: "1rem" }}>
+                              Scheduling a pickup means agreeing to the Resale Agreement — commission structure, custody terms, payout schedule, and how unsold or declined items are handled. Read it before you check the box.
+                            </p>
+                            <a href="/WLC-Resale-Agreement.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--sage-dark)", textDecoration: "underline", textUnderlineOffset: "3px", display: "block", marginBottom: "1rem" }}>
+                              Read the Resale Agreement (PDF) →
+                            </a>
+                            <label style={{ display: "flex", gap: "0.6rem", alignItems: "flex-start", cursor: "pointer" }}>
+                              <input
+                                type="checkbox"
+                                required
+                                checked={form.agreementAccepted}
+                                onChange={e => handleChange("agreementAccepted", e.target.checked)}
+                                style={{ marginTop: "0.2rem", flexShrink: 0 }}
+                              />
+                              <span style={{ fontSize: "0.82rem", fontWeight: 500, color: "var(--ink)", lineHeight: 1.5 }}>
+                                I have read and agree to the Resale Agreement. I understand that possession transfers at pickup and my 30-day reporting cycle begins when I approve the listing.
+                              </span>
+                            </label>
+                          </div>
                         </div>
                       )}
 
