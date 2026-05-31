@@ -2,6 +2,18 @@
 
 A voice-consistent website and API for a Los Angeles-based resale, estate, and value recovery service. The owner's brand voice is the core product: human-first, business-always, never influencer-polished, never SEO-sanitized.
 
+## Project Map — read these first
+*If you are an AI agent opening this project: read this section, then the files below, before doing anything. Everything you need to understand the business and its voice is here. You do not need to be told folder by folder.*
+
+- **`attached_assets/wlc-brand-vault_*.md`** — THE brand voice source of truth. Origin story, positioning, locked hero, banned language, the four pillars, voice layers. Add, never delete. **Read this before writing any client-facing copy.**
+- **`docs/SERVICES-PRICING.md`** — the Services & Pricing foundation: two-layer model (Quick Sells + pillars), rates, flex blocks, supply add-on bundles. Build the Services/Pricing pages from this.
+- **`artifacts/api-server/src/voice-profile.ts`** — the operational voice profile (code form): rules, anti-patterns, canonical copy, annotated examples. Powers the voice + caption tools.
+- **`docs/DIRECTIVE.md`** — how the owner's tools fit together (Claude / Manus / Gemini / Unfold) + content-engine scope.
+- **`docs/GO-LIVE.md`** — plain-English publish checklist (publish → bookings → caption studio).
+- **`docs/LAUNCH-KIT.md`** — ready-to-post launch copy (locked). `docs/CONTENT-ENGINE.md` — caption prompt system.
+- **`docs/HANDSHAKE.md`** — the resale chain-of-custody workflow + how to turn on bookings.
+- **`artifacts/wlc-site/`** — the website (React + Vite). Internal Caption Studio at `/caption-studio`.
+
 ## Run & Operate
 
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 8080)
