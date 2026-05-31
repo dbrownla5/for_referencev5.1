@@ -22,8 +22,8 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 
 export default function Home() {
   usePageMeta({
-    title: "The Well Lived Citizen — There's an Easier Way · Los Angeles",
-    description: "One capable person for the things that quietly pile up at home and in life — sorted, set up, and handled, so everything feels easier to manage again. Greater Los Angeles.",
+    title: "The Well Lived Citizen — One Person, One Number, One Invoice · Los Angeles",
+    description: "One person for the move, the resale, the storage unit, and the other thing currently ruining your week. Home resets, house calls, legacy inventory, and curated resale in greater Los Angeles.",
     path: "/",
   });
   return (
@@ -46,7 +46,7 @@ export default function Home() {
                 letterSpacing: "-0.02em",
                 marginBottom: "2rem",
               }}>
-                There's an easier way to do that.
+                One person for the move, the resale, the storage unit, and the other thing currently ruining your week.
               </h1>
               <p style={{
                 fontSize: "clamp(0.95rem, 1.8vw, 1.15rem)",
@@ -56,7 +56,7 @@ export default function Home() {
                 marginBottom: "2.5rem",
                 maxWidth: 540,
               }}>
-                One capable person for the things that quietly pile up at home and in life — sorted, set up, and handled, so everything feels easier to manage again.
+                Home resets, moves, legacy inventory, house calls, resale. One number, one person, one invoice.
               </p>
               <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                 <Link href="/contact" className="btn btn-sage">Schedule a Call</Link>
@@ -135,10 +135,10 @@ export default function Home() {
       <section style={{ backgroundColor: "var(--parchment-mid)", padding: "6rem 0" }}>
         <div className="container">
           <FadeUp>
-            <span className="eyebrow eyebrow-sage">Three Easy Ways to Start</span>
-            <h2 className="display-md" style={{ color: "var(--ink)", maxWidth: 560, marginBottom: "0.75rem" }}>Start small. Start today.</h2>
+            <span className="eyebrow eyebrow-sage">Start here</span>
+            <h2 className="display-md" style={{ color: "var(--ink)", maxWidth: 600, marginBottom: "0.75rem" }}>Three things I can take off your plate this week.</h2>
             <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--sage-dark)", maxWidth: 640, lineHeight: 1.85, marginBottom: "3.5rem" }}>
-              No big project required. Pick the one that fits, and we'll take it from there.
+              Not every job is a whole project. Pick one. Booked and handled, usually within a few days.
             </p>
           </FadeUp>
 
@@ -176,7 +176,7 @@ export default function Home() {
                 <div className="underlay-tag" style={{ marginBottom: "1.5rem" }}>03 — Curated Resale</div>
                 <h3 className="display-sm" style={{ color: "var(--ink)", marginBottom: "1rem" }}>Fast Bag Fill</h3>
                 <p style={{ fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.8, color: "var(--ink-soft)", marginBottom: "2rem" }}>
-                  Fill a bag with clothing and accessories you're done managing. I pick up, evaluate, route, and list. You stop tripping over it. Free pickup in the service area.
+                  Fill a bag with clothing and accessories you're done with. I pick up, evaluate, route to the platform where the right buyer is, and list. You stop tripping over it. Free pickup in LA.
                 </p>
                 <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
                   <Link href="/fast-bag-fill" className="btn btn-ink">Schedule a Pickup</Link>
