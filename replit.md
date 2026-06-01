@@ -1,98 +1,123 @@
-# Resale / Estate Services Site
+# The Well Lived Citizen — Agent Operating Instructions
 
-A voice-consistent website and API for a Los Angeles-based resale, estate, and value recovery service. The owner's brand voice is the core product: human-first, business-always, never influencer-polished, never SEO-sanitized.
+**If you are an AI agent working in this project, this file is your briefing. Read it fully before you touch anything.** You are not a search-and-replace tool. You are acting as the marketing developer for a real business with a documented brand. Your job is to understand the whole business first, then make changes that stay consistent everywhere.
 
-## Project Map — read these first
-*If you are an AI agent opening this project: read this section, then the files below, before doing anything. Everything you need to understand the business and its voice is here. You do not need to be told folder by folder.*
+---
 
-- **`docs/BRAND-VOICE.md`** — ⭐ FINAL brand voice (locked 2026-05-31). Locked hero, core truths, positioning lines, tone, observational-specificity rule, Brand Monster words, the final test. **Read before writing any client-facing copy. Supersedes voice-profile.ts where they conflict.**
-- **`docs/CONTENT-SYSTEM.md`** — ⭐ how to turn Dayna's brain dumps into brand-aligned copy: the two-layer client model + the 8-stage transformation process. Use when generating any content/captions.
-- **`docs/SERVICES-PRICING.md`** — ⭐ FINAL canonical pricing (locked 2026-05-31): entry/core/continuity tiers, all rates, flex blocks, commission table, supply add-ons, internal pricing guidance. Build Services/Pricing pages + the single-source content config from this.
-- **`docs/brand-source/`** — Dayna's untouched original source docs (Brand Foundation Lines, Case Study Format, Content Transformation System). The raw truth the canonical docs were built from.
-- **`attached_assets/wlc-brand-vault_*.md`** — deeper brand context: origin story, the Gayle arc, inherited-stuff thesis, social architecture. Background; the ⭐ docs above win on any conflict.
-- **`artifacts/api-server/src/voice-profile.ts`** — operational voice profile (code form) powering the voice/caption tools. Superseded by BRAND-VOICE.md where they conflict.
-- **`docs/DIRECTIVE.md`** — how the owner's tools fit together (Claude / Manus / Gemini / Unfold) + content-engine scope.
-- **`docs/GO-LIVE.md`** — plain-English publish checklist (publish → bookings → caption studio).
-- **`docs/LAUNCH-KIT.md`** — ready-to-post launch copy (locked). `docs/CONTENT-ENGINE.md` — caption prompt system.
-- **`docs/HANDSHAKE.md`** — the resale chain-of-custody workflow + how to turn on bookings.
-- **`artifacts/wlc-site/`** — the website (React + Vite). Internal Caption Studio at `/caption-studio`.
+## 1. What this business is
 
-## How to change anything (anti-drift law)
-*For any AI agent working here. Drift = the same fact saying two different things in two places. That is always a bug, never acceptable. Follow this:*
+**The Well Lived Citizen** — practical operational support for modern life. One capable person for the move, the resale, the storage unit, the errands, the setups, the vendor coordination, and the rest of what quietly piles up. Los Angeles, greater LA area.
 
-1. **Understand the whole business first.** Read the Project Map and the brand vault before touching copy. You are acting as the owner's marketing developer, not a search-and-replace tool. Localized edits that ignore the rest of the site are the #1 cause of drift.
-2. **Single source of truth.** Business facts — prices, service names, the four pillars, the hero/taglines, contact info, canonical service descriptions — must live in ONE place and be imported everywhere they appear. **Never hardcode a price, name, or tagline directly in a page.** (Target architecture: a single `brand`/content config the pages read from. If it does not exist yet, building it is the highest-priority refactor — and until it does, rule 3 is mandatory.)
-3. **A change is not done until every instance agrees.** Before changing any fact or phrase, search the ENTIRE repo for every place it appears (grep the price, the exact phrase, the service name across `artifacts/`, `docs/`, `attached_assets/`) and update all of them. Report what you changed and where.
-4. **Re-check voice after any copy change.** Confirm the edit complies with the brand vault's banned-language list and voice layers. On-brand-everywhere or it's not done.
+- Legal entity: **Well Dressed Citizen LLC**. Resale arm: **The Well Lived Closet**.
+- Founder: **Dayna** (first name only, publicly).
+- The true category is **operational relief** — NOT luxury concierge, home organization, caregiving, "wellness," or minimalism.
 
-## Run & Operate
+---
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 8080)
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
-- Required env: `AI_INTEGRATIONS_OPENAI_BASE_URL` + `AI_INTEGRATIONS_OPENAI_API_KEY` — auto-provisioned via Replit AI Integrations
+## 2. The rules (non-negotiable)
 
-## Stack
+### Anti-drift law
+Drift = the same fact saying two different things in two places. It is always a bug.
+1. **Understand the whole business before editing copy.** Read the brand-truth docs in §4.
+2. **Single source of truth.** Every price, service name, the hero, taglines, contact info, and canonical line lives in **`artifacts/wlc-site/src/content/brand.ts`**. Pages import from it. **Never hardcode these values in a page.** If a page still has a hardcoded fact, migrate it to import from `brand.ts`.
+3. **A change is not done until every instance agrees.** Before changing a fact, search the whole repo (`artifacts/`, `docs/`, `attached_assets/`) and update every occurrence — or better, change it once in `brand.ts`.
+4. **Re-check voice after any copy change** against `docs/BRAND-VOICE.md`.
 
-- pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- AI: OpenAI via Replit AI Integrations (gpt-5.4, no user API key needed)
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+### Voice (the short version — full rules in docs/BRAND-VOICE.md)
+- Calm, observant, capable, grounded, lightly human. Emotionally intelligent without being emotionally performative.
+- Win through **observational specificity** ("the storage unit everyone avoids opening"), never elevated/abstract language ("stewardship ecosystems").
+- **The final test:** if it sounds like a trusted person helping solve a real problem → good. If it sounds like a keynote, luxury retreat, founder manifesto, or branded LinkedIn post → rewrite. Optimize for recognition ("Yes. Exactly.") over performance.
+- Never: preachy, spiritually branded, therapy-coded, startup-motivational, over-polished.
 
-## Where things live
+---
 
-- `artifacts/api-server/src/voice-profile.ts` — the source-of-truth voice profile document (update this to retrain the voice tool)
-- `artifacts/api-server/src/routes/voice.ts` — `/api/voice/profile` and `/api/voice/analyze` endpoints
-- `lib/api-spec/openapi.yaml` — OpenAPI contract (source of truth for all API shapes)
-- `lib/api-client-react/src/generated/` — generated React Query hooks (do not edit manually)
-- `lib/api-zod/src/generated/` — generated Zod validation schemas (do not edit manually)
+## 3. The locked hero (from brand.ts / docs/BRAND-VOICE.md)
 
-## Voice Profile Summary
+> **Professional problem solver. Unofficial fixer of the things life keeps turning into projects.**
+> Moves, resale, errands, setups, storage units, logistics, tech, vendor coordination, and the things you forgot about too.
 
-The owner's voice is built on these structural moves:
-- **Triplet opener** — "Not everything should be X. Not everything should be Y. And not everything should be Z." — earns the pivot
-- **Commercial-emotional bridge** — business logic and human empathy land in the same sentence, never separated
-- **Discovery framing** — the client is paying to *uncover*, not just sort/donate/sell
-- **Lists as possibilities** — each bullet is something the reader hasn't thought to look for, not a feature inventory
-- **Short punctuation lines** — for emphasis, not style
+Do not change the hero without Dayna's sign-off. Other approved positioning lines (e.g. "One person for the move, the resale, the storage unit, and the other thing currently ruining your week") may be used across the site — but they are not the hero.
 
-Anti-patterns the voice tool flags: SEO-speak, corporate sanitizer tone, internal business language in client-facing copy, lists as feature menus, framing the service as sorting when it's actually value recovery.
+---
 
-## Architecture decisions
+## 4. Brand-truth documents — read these, in this precedence
 
-- Voice profile is a TypeScript object (not a DB table) — it's version-controlled, reviewable, and editable without a migration
-- OpenAI system prompt embeds the full voice profile + 5 annotated before/after examples at analysis time
-- `/api/voice/analyze` uses `gpt-5.4` with `response_format: { type: "json_object" }` for reliable structured output
-- Voice tool is API-only by design — it's a behind-the-scenes audit tool, not a user-facing feature
+1. **`docs/BRAND-VOICE.md`** ⭐ — final voice: hero, core truths, positioning lines, tone, Brand Monster word list, the final test.
+2. **`docs/CONTENT-SYSTEM.md`** ⭐ — how to turn Dayna's brain dumps into copy: the two-layer client model + 8-stage transformation process. Use for any content/captions.
+3. **`docs/SERVICES-PRICING.md`** ⭐ — final canonical pricing + service scope. Build the Services and Pricing pages from this.
+4. **`artifacts/wlc-site/src/content/brand.ts`** ⭐ — the single source of truth in code. Facts the site renders come from here.
+5. **`docs/brand-source/`** — Dayna's untouched original docs (the raw truth the above were built from).
+6. **`attached_assets/wlc-brand-vault_*.md`** — deeper background (origin story, the Gayle arc, social architecture). The ⭐ docs win on any conflict.
 
-## Product
+If anything in older notes or `voice-profile.ts` conflicts with the ⭐ docs, the ⭐ docs win.
 
-A service site for an LA-based resale, estate, and value recovery specialist. Services include:
-- Fast Bag Fill (resale pickup for active-market clothing/accessories)
-- Reset and House Call (full clean-out with donation handling)
-- Value recovery (uncovering unrealized resale value, insurance blind spots, collectibles, heirlooms, warranty recoveries)
+---
 
-## User preferences
+## 5. Pricing quick reference (truth lives in brand.ts + docs/SERVICES-PRICING.md)
 
-- Voice: human-first, business-always — never influencer, never SEO-polished
-- The voice tool must analyze by pattern/rhythm/emotional architecture — not word lists
-- Launch post / promotional content is a separate project
-- SEO metadata is a separate pass
-- This is a voice pass only — no redesign, no structural changes to the site
+Entry tier (label it **"Quick Entry / Fast Support,"** never "Quick Books"):
+- 4-Hour Practical Reset — **$495 flat**
+- 2-Hour House Call — **$350**
+- Fast Bag Pickup — **commission-based, free pickup**
 
-## Gotchas
+Core: Home Organization & Move Support **$150/hr** (flex blocks: 10hr $1,250 / 25hr $3,150, never expire; Move-In Day $1,200 flat) · House Calls **$175/hr, 2-hr min** · Legacy **$175/hr, 2-hr min** (whole home scoped) · Home Closeouts **$150/hr + resale commission**.
 
-- Run `pnpm --filter @workspace/api-spec run codegen` after any change to `lib/api-spec/openapi.yaml`
-- The voice profile is in `voice-profile.ts` — update it there and rebuild the server; no codegen needed
-- `AI_INTEGRATIONS_OPENAI_API_KEY` is a dummy string for SDK compatibility — the real auth is via `AI_INTEGRATIONS_OPENAI_BASE_URL`
-- API server runs on port 8080 (not 5000 as the default replit.md suggested)
+Resale commission (client / TWLC, on net): Clothing & Accessories 45/55 · Designer & Luxury 50/50 · Furniture & Significant Home 50/50 · Full Closet Liquidation 45/55.
 
-## Pointers
+Supply bundles (supplies only, NOT labor): $150 / $250 / $500. Monthly retainer from $500/mo.
 
-- See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details
+---
+
+## 6. What's already built
+
+- **Website** (`artifacts/wlc-site/`, React + Vite + wouter): Home, About, Services, Pricing, FAQ, Contact, four pillar pages, Reset / House Call / Fast Bag Fill entry pages, signed-intake → bag-pickup → consent flow. Internal Caption Studio at `/caption-studio`.
+- **API server** (`artifacts/api-server/`, Express 5): `/api/contact`, `/api/handshake/*` (9-step resale chain-of-custody + ops dashboard at `/api/handshake/dashboard`), `/api/voice/*`, `/api/voice/captions`.
+- **Single source of truth** `brand.ts` exists; the homepage hero imports from it.
+
+---
+
+## 7. What to build next (priority order)
+
+1. **Migrate every page to `brand.ts`.** Replace hardcoded prices/names/hero/pillar text in `Home.tsx`, `Services.tsx`, `Pricing.tsx`, and the pillar/entry pages with imports from `artifacts/wlc-site/src/content/brand.ts`. This is the anti-drift protection — finish it.
+2. **Rebuild the Services + Pricing pages** from `docs/SERVICES-PRICING.md` (entry/core/continuity tiers, flex blocks, commission table, supply bundles). Keep the current visual style.
+3. **Confirm the hero + all pricing** render from `brand.ts` and agree across Home, Services, Pricing, and intake.
+
+When in doubt about scope or a number, ask Dayna — do not invent.
+
+---
+
+## 8. How to run, build, and deploy
+
+**Stack:** pnpm workspaces, Node 24, TypeScript, Express 5 API, PostgreSQL + Drizzle, Zod, Vite/React site. Use **pnpm** (not npm/yarn).
+
+**Commands:**
+- `pnpm run typecheck` — typecheck all packages (run before every commit).
+- `pnpm run build` — typecheck + build all.
+- Site build needs two env vars: `PORT` (e.g. 5000) and `BASE_PATH` (`/`). Example: `PORT=5000 BASE_PATH=/ pnpm --filter @workspace/wlc-site run build`.
+- API server: `pnpm --filter @workspace/api-server run dev` (listens on `PORT`, default 8080).
+- DB schema: `pnpm --filter @workspace/db run push`.
+
+**Deploy (Replit autoscale):**
+- The server listens on `PORT`; routes mount under `/api`. Express 5 / path-to-regexp v8 does NOT allow inline-regex routes like `/:id(\d+)` — use plain `/:id`.
+- **Known gap:** the API server currently serves only `/api`, not the built website. To serve the full site from one deployment, have the server serve static files from `artifacts/wlc-site/dist/public` with an SPA fallback to `index.html` for non-`/api` routes, and run the site build before starting the server. (Or deploy the site as a separate static deployment.)
+- Secrets (Replit): `DATABASE_URL`, `RESEND_API_KEY`, `CONTACT_FROM`, `PUBLIC_SITE_URL`, and (for AI features) the Replit AI Integration vars or a `Gemini` key. Never hardcode secrets in files like `.replit`.
+- Full publish checklist: `docs/GO-LIVE.md`. Resale workflow setup: `docs/HANDSHAKE.md`.
+
+**Cost note:** Dayna prefers AI work run through Claude or Gemini, not Replit AI (cost). Keep the hosted site free of paid AI calls where possible.
+
+---
+
+## 9. What NOT to do
+
+- Don't change the hero, prices, or service names without Dayna's sign-off.
+- Don't hardcode facts in pages — use `brand.ts`.
+- Don't write copy that sounds like a keynote, luxury brand, therapy carousel, or founder manifesto.
+- Don't label the entry offers "Quick Books" publicly.
+- Don't add new apps or services. Close loops; don't open them.
+- Don't claim a half-built feature is finished. Report honestly.
+- The business is NOT contracting (CA $1,000 unlicensed limit), caregiving, estate-law, or therapy — don't imply licensed/regulated services.
+
+---
+
+## 10. Domains
+Two registered: **www.thewelllivedcitizen.com** (recommended primary/canonical) and **welllivedcitizen.com** (recommended 301 redirect). Primary pending Dayna's final confirmation.
