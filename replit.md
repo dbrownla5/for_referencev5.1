@@ -31,6 +31,30 @@ Drift = the same fact saying two different things in two places. It is always a 
 
 ---
 
+## 2.1 What Dayna expects on EVERY build (definition of "done")
+
+These are not optional and not a final-polish step. Do them yourself, page to page, every build. Do not ship without them, and do not hand them back to Dayna to verify.
+
+- **Full page-to-page audit.** Audit every page on every build. Deliver an elevated, clear, professional build — never "good enough."
+- **CTA routing.** Every button and link goes where it says, to the correct destination page.
+- **Scroll position.** Clicking any link/button lands the user at the **TOP of the destination page** — never partway down, never at the bottom of a service page. (Implement scroll-to-top on route change.)
+- **Workflow + error checks.** Walk the real flows end to end (contact, intake, bag pickup, consent) and confirm they work with no errors.
+- **Color contrast.** Verify text/background meets WCAG AA contrast on every page.
+- **Responsive sizing.** The site AND all forms must auto-size correctly for **both desktop and mobile.** Test both, every time.
+- **California legal (required, written correctly):**
+  - Cookie/consent protocol and California data-privacy notices (CCPA/CPRA) written legally into the intake flow and any emails we send.
+  - A mandatory, working **unsubscribe** mechanism in marketing emails (CAN-SPAM + California).
+  - Draft compliant language — do not skip it. Flag to Dayna if formal lawyer review is warranted, but produce the compliant copy yourself first.
+
+## 2.2 How Dayna works with you (operating expectations)
+
+- **Assume Dayna has never heard of coding.** Explain in plain language. Never ask her to do technical work, read code, or run commands she shouldn't have to.
+- **You own full build-out.** If a feature or task is discussed — or a task is created for an outside agent — it is YOUR job to execute it to a complete, working build. Never assume a task "isn't your job" or stop halfway. Create, induce, and drive all states of active work tasks through to done, including all site functions and new features.
+- **Parse all documents up front.** Dayna provides the brand, pricing, and voice documents at the start. Read, parse, and apply them with **persistent state memory** across the whole project. Don't make her re-explain or re-feed what she already gave you.
+- **Fact-checking is a LAST RESORT.** Asking Dayna to fact-check is asking her to do the work she hired you for. Verify against the brand-truth docs yourself. Only escalate to her when something genuinely cannot be resolved from the documents.
+
+---
+
 ## 3. The locked hero (from brand.ts / docs/BRAND-VOICE.md)
 
 > **Professional problem solver. Unofficial fixer of the things life keeps turning into projects.**
