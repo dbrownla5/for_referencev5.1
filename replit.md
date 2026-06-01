@@ -111,6 +111,8 @@ The signed-intake → bag-pickup → consent flow ("the handshake") is currently
 
 When extending intake, never treat it as resale-only. It is the client relationship backbone for the entire business.
 
+**Resilience (already built):** `/api/handshake/intake` writes to the database when available; if the DB isn't provisioned yet, it **falls back to emailing the lead to the owner** (via Resend) and still confirms success — so a lead is never lost. Provisioning Postgres turns on full chain-of-custody tracking, but lead capture works without it as long as `RESEND_API_KEY` is set. Do not remove this fallback.
+
 ## 7. What to build next (priority order)
 
 1. **Migrate every page to `brand.ts`.** Replace hardcoded prices/names/hero/pillar text in `Home.tsx`, `Services.tsx`, `Pricing.tsx`, and the pillar/entry pages with imports from `artifacts/wlc-site/src/content/brand.ts`. This is the anti-drift protection — finish it.
