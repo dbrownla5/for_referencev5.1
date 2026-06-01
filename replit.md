@@ -113,6 +113,17 @@ When extending intake, never treat it as resale-only. It is the client relations
 
 **Resilience (already built):** `/api/handshake/intake` writes to the database when available; if the DB isn't provisioned yet, it **falls back to emailing the lead to the owner** (via Resend) and still confirms success — so a lead is never lost. Provisioning Postgres turns on full chain-of-custody tracking, but lead capture works without it as long as `RESEND_API_KEY` is set. Do not remove this fallback.
 
+## 6.2 FIRST PRIORITY — connect the database AND verify the app is USING it
+
+Dayna previously provisioned a Postgres database, but the app was never actually writing to it. **Do not repeat that.** "A database exists" is not done. "The app writes to it and reads from it" is done.
+
+1. Ensure a Postgres database exists for this project and that **`DATABASE_URL` is set where the app actually runs** — both the dev process and the deployment must see it, not just the workspace shell.
+2. Create the tables: `pnpm --filter @workspace/db run push` (schema lives in `lib/db/src/schema/`). The app connects through `@workspace/db` using `DATABASE_URL`.
+3. Also set: `RESEND_API_KEY`, `CONTACT_FROM`, `PUBLIC_SITE_URL`.
+4. **VERIFY USE (required):** submit a real test booking and a test contact on the live site, then confirm the rows actually persist — check the ops dashboard at `/api/handshake/dashboard` and the `handshakes` / `contact_submissions` tables. If the test lead only arrives by email (the fallback in §6.1), the database is **NOT** connected — keep fixing the `DATABASE_URL` wiring until submissions create database rows.
+
+Done = a test submission creates a row in the database **and** appears on the dashboard.
+
 ## 7. What to build next (priority order)
 
 1. **Migrate every page to `brand.ts`.** Replace hardcoded prices/names/hero/pillar text in `Home.tsx`, `Services.tsx`, `Pricing.tsx`, and the pillar/entry pages with imports from `artifacts/wlc-site/src/content/brand.ts`. This is the anti-drift protection — finish it.
