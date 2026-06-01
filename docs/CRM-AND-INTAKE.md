@@ -6,6 +6,10 @@
 - **Business Dashboard** (operator-facing, Dayna only, behind auth) — the CRM cockpit: clients, profiles, tickets, calendar, agreements, messages, money.
 Both must be **fully built.** The client sees only their own data; the operator sees everything.
 
+## Current operating constraints (startup — keep generic + low-bar)
+- **Payments = Zelle for now.** Stripe is NOT available yet (EIN reactivation pending with California; Stripe won't approve until it's active). Payment is **Zelle to the business checking under the parent LLC** — legal and fine for now. So: show the client the amount + Zelle instructions/tag, let them mark "payment sent," and Dayna confirms receipt and marks the booking **paid** in the dashboard. **Build payments provider-agnostic** so Stripe drops in later without a rebuild — do not hard-wire Stripe.
+- **Legal = generic, low-bar, no lawyer right now.** Use standard, conservative, generic templates for cookie/privacy/unsubscribe and the resale agreement. Do NOT gate anything on a paid lawyer or a paid e-sign provider. Dayna reviews legal language herself via a legal AI. Keep copy plain; avoid claims that create exposure.
+
 ## The core model: ONE intake form, conditional branching
 
 There is **one intake form**, not a separate form per service. The questions branch — **each answer leads to a conditional next question** — so the same form handles every service path. The path the client takes only changes *which follow-up questions* appear and *what happens after submit*.
@@ -45,7 +49,7 @@ This is a required, fully-built feature — not a checkbox stub. The current typ
 7. **Manual upload:** Dayna can upload/attach any document (PDF/image) to any client profile from the dashboard.
 8. **Dashboard management:** view, download, and re-send agreements; see the signed copy + audit trail; filter clients by agreement status.
 
-**Legal validity (required):** comply with the federal ESIGN Act and California UETA — show electronic-records consent, capture intent to sign, associate the signature with the specific record, retain the signed record, and provide the signer a copy. A vetted e-sign provider (e.g. Dropbox Sign / DocuSign API) is acceptable in place of a self-built flow, as long as the signed doc + audit trail still land on the client's profile. Flag for legal review before relying on it for disputes.
+**Legal validity (generic, low-bar — no paid provider, no lawyer):** follow the basic ESIGN Act / California UETA shape — show electronic-records consent, capture intent to sign, associate the signature with the specific record, retain the signed record, and give the signer a copy. **Build this self-hosted** (typed/drawn signature + audit trail + generated PDF); do NOT require a paid e-sign provider (Stripe-style gating) right now. Use a conservative, generic agreement template. Dayna reviews the legal language herself via a legal AI — do not block on a lawyer.
 
 **Storage:** signed PDFs + uploads go in object storage (a Replit object-storage bucket is already configured in `.replit`) or DB blob, referenced from the client record.
 
@@ -109,7 +113,7 @@ Clients log in and self-serve. This is where the business's "no product, all ser
 - **Account & login:** client accounts with passwordless magic-link (preferred) or email + password. A profile is auto-linked to their CRM record (deduped by email).
 - **Their dashboard:** upcoming + past **bookings** and the **live status of each service**; for resale clients, **their own inventory** with live chain-of-custody status per item (received → evaluated → listed → sold → paid out), including sale price and payout.
 - **Book & schedule:** choose a service and a time; reschedule/cancel within policy. Writes to the shared calendar + creates/updates the booking on their profile.
-- **Pay:** pay for services online (Stripe — checkout + invoices/receipts); paid status reflected on the booking and the operator Money view. Deposits/flat fees/hourly as the service requires.
+- **Pay:** for now, **Zelle** — show the amount + Zelle instructions/tag, client marks "payment sent," Dayna confirms receipt and marks the booking paid; paid status reflected on the booking + operator Money view. Built **provider-agnostic** so Stripe (checkout/invoices/receipts) drops in later when the EIN is active.
 - **Inventory visibility:** resale clients see each item's status, photos, listing, sale price, and payout — the client-facing view of the chain-of-custody ticket.
 - **Messaging:** a thread with Dayna **inside the portal** (with email notification on new messages).
 - **Photo upload:** clients upload pictures (items for resale, spaces for a quote, etc.) → stored in object storage, attached to their profile/booking/inventory and visible to Dayna in the dashboard.
@@ -119,7 +123,7 @@ Clients log in and self-serve. This is where the business's "no product, all ser
 ## Architecture notes (for whoever builds it)
 - **One database, two surfaces.** Shared client/profile/ticket/booking/message tables. Operator sees all; client access is **row-scoped to their own records** (enforce server-side).
 - **Auth:** client magic-link/email auth for the portal; separate admin auth for the dashboard. Never expose the dashboard to clients.
-- **Payments:** Stripe (checkout, invoices, receipts, refunds); record every transaction on the client profile + Money view. Never hardcode keys — use secrets.
+- **Payments:** provider-agnostic. **Now: Zelle** (manual confirm + mark-paid in the dashboard) to the parent-LLC business checking. **Later: Stripe** (checkout, invoices, receipts, refunds) when the EIN is active — drop-in, no rebuild. Record every transaction on the client profile + Money view. Never hardcode keys — use secrets.
 - **Files:** object storage (the bucket already configured in `.replit`) for photo uploads + signed agreements; reference from the relevant record.
 - **Messaging:** a messages/threads table; in-portal + email notification; replies from the dashboard.
 - **Notifications:** email (Resend) for booking confirmations, schedule changes, new messages, reports, and payouts.
@@ -135,7 +139,7 @@ Clients log in and self-serve. This is where the business's "no product, all ser
 1. **Unified conditional intake form** → every submission creates/updates a deduped **client profile** (all paths); resale path opens the existing handshake ticket.
 2. **Business dashboard v1:** clients list (search/sort/filter) + client profile page (notes, status, history) + tickets board + calendar + at-a-glance home.
 3. **Client portal v1:** client login (magic link), view their bookings + service status + resale inventory status, message Dayna, upload photos.
-4. **Payments + scheduling:** Stripe pay/book/schedule online; Money view in the dashboard.
+4. **Payments + scheduling:** Zelle now (show amount + tag, client marks sent, Dayna confirms + marks paid) with a Money view in the dashboard; built provider-agnostic so Stripe drops in later.
 5. **E-sign agreements (full build per spec)** + document uploads on profiles.
 6. **Polish:** notifications/automation, reporting, calendar deepening.
 
