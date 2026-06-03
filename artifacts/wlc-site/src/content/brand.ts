@@ -55,9 +55,9 @@ export const entryOffers = [
   {
     id: "reset",
     name: "4-Hour Practical Reset",
-    price: "$495 flat",
+    price: "$495 · one 4-hour block",
     blurb:
-      "Focused operational support for one room, one task, one reset, one move stage — one measurable outcome.",
+      "One focused 4-hour block to tackle a single thing in one session — one room, one task, one move stage. A defined block of time, not an open-ended hourly engagement.",
     href: "/the-reset",
   },
   {
@@ -112,7 +112,7 @@ export const pillars = [
 
 /** Full canonical pricing — see docs/SERVICES-PRICING.md for scope detail. */
 export const pricing = {
-  reset4hr: "$495 flat",
+  reset4hr: "$495 · one 4-hour block",
   houseCall2hr: "$350",
   homeOrgHourly: "$150/hr",
   flexBlock10hr: "$1,250 prepaid",
