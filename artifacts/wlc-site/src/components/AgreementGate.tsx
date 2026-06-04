@@ -13,10 +13,10 @@ import { useState, useRef } from "react";
 const AGREEMENT_SECTIONS: { h: string; b: string }[] = [
   { h: "1. Possession & Custody", b: "Items handed to WLC at pickup transfer into WLC's custody for the purpose of evaluation, listing, and resale. Custody is logged at the moment of handoff." },
   { h: "2. Evaluation Window", b: "WLC will evaluate items within 7–10 business days of pickup and provide an itemized inventory report with estimated resale values." },
-  { h: "3. Consignment Split", b: "Net proceeds (sale price minus platform fees and shipping) are split by item tier: Standard 40%, Contemporary 45%, Designer 50%, Luxury 60% to the Client." },
+  { h: "3. Commission Split", b: "Commission is calculated on net sale price (sale price minus platform fees, shipping, and approved transaction costs). Client share by category: Clothing & Accessories 45%, Designer & Luxury 50%, Furniture & Significant Home 50%, Full Closet Liquidation 45%. Bags primarily of lower-value items may use an adjusted structure, reviewed and communicated before listing." },
   { h: "4. Client Review & Consent", b: "After the inventory report, the Client has a 24-hour window to pull any item from resale. Pulled items are returned at the next scheduled visit." },
-  { h: "5. Payout", b: "Payouts are issued on a 30-day cycle from the date of sale, on the first Monday following the 30-day mark." },
-  { h: "6. Items Not Sold", b: "Items that do not sell within 90 days may be donated, returned, or re-listed at WLC's discretion, in consultation with the Client." },
+  { h: "5. Payout", b: "Commission payouts are issued monthly for items that have sold." },
+  { h: "6. Items Not Sold", b: "Most strong inventory sells within approximately 6–9 months. At about 180 days, remaining unsold items may be continued in the resale workflow, rerouted, returned, or donated, per Client preference and operational judgment — with reasonable attempts to contact the Client first." },
   { h: "7. Condition & Authenticity", b: "The Client affirms that items are their property to sell and are represented honestly as to condition and authenticity." },
   { h: "8. Liability", b: "WLC is not liable for loss or damage beyond the documented resale value of any item." },
 ];
