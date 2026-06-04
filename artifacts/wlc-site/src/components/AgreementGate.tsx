@@ -136,10 +136,13 @@ export default function AgreementGate() {
         <div><label style={label}>Phone</label><input style={input} value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="Your phone" /></div>
         <div><label style={label}>Neighborhood</label><input style={input} value={form.neighborhood} onChange={(e) => set("neighborhood", e.target.value)} placeholder="e.g. Silver Lake" /></div>
         <div>
-          <label style={label}>How many bags?</label>
+          <label style={label}>How many bags? (up to 2)</label>
           <select style={input} value={form.bagsCount} onChange={(e) => set("bagsCount", e.target.value)}>
-            <option value="">Select…</option><option value="1">1 bag</option><option value="2-3">2–3 bags</option><option value="4-6">4–6 bags</option><option value="closet">A full closet</option>
+            <option value="">Select…</option><option value="1">1 bag</option><option value="2">2 bags</option>
           </select>
+          <p style={{ fontSize: "0.7rem", color: "var(--sage-dark)", marginTop: "0.4rem", lineHeight: 1.4 }}>
+            Up to 2 large bags (must fit in an Uber). More than that is a Reset or House Call — note it below and I'll route it right.
+          </p>
         </div>
         <div><label style={label}>Rough item count</label><input style={input} value={form.estimatedItems} onChange={(e) => set("estimatedItems", e.target.value)} placeholder="e.g. ~30" /></div>
         <div>
