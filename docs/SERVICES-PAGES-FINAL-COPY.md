@@ -1,6 +1,6 @@
 # THE WELL LIVED CITIZEN — SERVICE PAGES · FINAL VERBATIM COPY
 
-*Completes the MASTER PARTS BIN (Dayna's uploads, June 2026) in the "Chaos Wrangler" voice. Dayna's written sections are preserved verbatim. All prices verified against docs/SERVICES-PRICING.md. This file is final page copy — plug in as written.*
+*Completes the MASTER PARTS BIN (Dayna's uploads, June 2026) in the "Chaos Wrangler" voice. Dayna's written sections are preserved verbatim. All facts and prices defer to docs/AWLC-SERVICES-MASTER-FINAL.md (Dayna's final master, verbatim) — see docs/FINAL-SOURCE-OF-TRUTH.md for precedence. This file is final page copy — plug in as written.*
 
 ---
 
@@ -106,14 +106,14 @@ The real requests this work comes from:
 **The Four Hour Reset — $495.**
 One room, one task, one measurable outcome. The specific room, the aftermath of a party, or the "my mother-in-law is coming" panic. The fastest way to find out what working together feels like.
 
-**Hourly — $150/hr.**
+**Hourly — $150/hr · 3-hour minimum.**
 For projects bigger than one block. Unpacking, room resets, closets, kitchens, layout, setup, move staging. We work in focused sessions until it's done — not until it's perfect, until it works.
 
-**Flex Blocks — 10 hours for $1,250 prepaid · 25 hours for $3,150 prepaid.**
-For phased projects, move transitions, and households that want me coming back as life keeps producing new piles. Hours never expire. Use them for a closet in March and a garage in July.
+**Flex Blocks — 2, 4, or 6-hour reserved work blocks.**
+For the here-and-there things that build up between bigger projects: task lists that grow over time, vendor access days, donation and return routing, guest prep, move follow-through, one-zone progress. Your time is already there when life needs it.
 
-**Move-In Day — $1,200 flat.**
-Studios and one-bedroom moves: I land the home the same day the boxes do. Kitchen functional, bed made, bathroom stocked, boxes broken down and gone. Larger homes scoped separately.
+**Modern Move Reset — $1,200 flat day rate.**
+Studios and one-bedroom get-it-done-fast moves, up to 8 hours straight: I land the home the same day the boxes do. Kitchen functional, bed made, bathroom stocked, boxes broken down and gone. The flat rate exists because these smaller footprints can realistically be packed, landed, or reset in a single uninterrupted day. Larger homes scope as projects.
 
 **The Move Closeout — $150/hr.**
 For when you have to leave before the home is fully closed out. You go first — I finish: final packing, labeling, separating what ships, what sells, what donates, what stores. Listing approved resale items, coordinating storage, UPS drop-offs, a final clean exit. Built for cross-state moves, downsizing, inherited homes, and timelines that didn't cooperate. Items sold along the way carry the standard resale commission; storage fees, postage, movers, and couriers are billed at cost.
@@ -136,9 +136,17 @@ Move-in support is the second half: unpacking with decisions attached, rooms set
 
 Most homes don't need more products. They need maybe six of the right ones.
 
-When a project genuinely calls for bins, drawer systems, hangers, risers, or pantry pieces, I plan it, source it, and build it in — sized to the actual space and the actual habits of the people using it, not the container aisle's imagination.
+When a project genuinely calls for bins, drawer systems, hangers, risers, or pantry pieces, I plan it, source it, and build it in — sized to the actual space and the actual habits of the people using it, not the container aisle's imagination. For deeper spaces like closets, offices, storage rooms, and linen systems, product support is quoted after walkthrough based on hidden volume and actual dimensions.
 
-Supply bundles when they're useful: **Starter $150 · Mid $250 · Full $500.** Supplies only, never labor, always discussed before anything is bought. Specialty materials outside a bundle are billed separately and approved first.
+**First-Night & First-Week Landing Bundles** — optional product budgets added to any move session or day rate so the home works before the first Target run:
+
+- **$150 — Essentials Landing.** Toilet paper, paper towels, basic utensils, water glasses, a wine or whiskey tumbler, laundry and dish detergent, trash bags, trash bins, two bath towels, two kitchen towels. The first-night basics so nothing has to be bought in a panic.
+- **$250 — Start-Up Landing.** Everything in Essentials, plus a starter dish set, dish soap, hamper, hangers, and entry-point setup (keys, mail, shoes, bag drop).
+- **$500 — Full Landing Bundle.** Everything in Start-Up, plus sheets, pillows, a steamer, and a duvet. The sleep, shower, eat, charge, and get dressed tonight bundle.
+
+**Pre-Buy Org Bundles** — for clients who want to front-load organizing supplies into the session: **$150 Starter · $250 Mid · $500 Full.** Item mixes are examples adjusted at intake; any item can be swapped for another of equal value. Supplies only, never labor.
+
+**A note on labels:** labels are always included — handwritten on-site by default, printed sets for larger project scopes. Printed labels are built as office work on my own time and brought back to apply, so hourly time isn't spent feeding a label maker mid-project. Want printed labels applied same-day? Say so at intake and it's built into the estimate.
 
 ## Decision Support
 
@@ -161,12 +169,13 @@ Between visits I'm routing the resale, scheduling the donation pickup, coordinat
 | | |
 |---|---|
 | The Four Hour Reset | $495 flat |
-| Hourly | $150/hr |
-| Flex Block — 10 hours | $1,250 prepaid · never expires |
-| Flex Block — 25 hours | $3,150 prepaid · never expires |
-| Move-In Day | $1,200 flat (studios and 1-bedrooms; larger homes scoped) |
+| Hourly | $150/hr · 3-hour minimum |
+| Flex Blocks | 2, 4, or 6-hour reserved work blocks |
+| Modern Move Reset | $1,200 flat day rate (studios and 1-bedrooms, up to 8 hours; larger homes scope as projects) |
 | The Move Closeout | $150/hr + standard resale commission on items sold |
-| Supply bundles | $150 / $250 / $500 · supplies only |
+| Landing bundles | $150 / $250 / $500 · supplies only |
+| Pre-Buy Org bundles | $150 / $250 / $500 · supplies only |
+| Larger projects | Quoted separately by scope, timeline, and intensity of lift |
 
 Hourly and project work may include time between visits — coordination, scheduling, resale routing, documentation, logistics. That's not padding; that's the part you're actually hiring out.
 
@@ -264,8 +273,8 @@ The classic. Two focused hours on the list. Tech setup, errands, returns, small 
 **Hourly — $175/hr, two-hour minimum.**
 For longer lists, vendor days, and standing visits. Same work, sized to the actual day.
 
-**Monthly Continuity — starting at $500/month.**
-A standing arrangement for households that want the person on call: recurring visits, rotating support, scheduling priority, and one number that already knows how the house works. Popular with out-of-town family. No membership required for anything else — this exists for people who want it.
+**Retainer continuity — for repeat clients.**
+A standing arrangement for households that want the person on call: recurring visits, rotating support, scheduling priority, and one number that already knows how the house works. Popular with out-of-town family. No membership. No subscription. Ease comes from relationship, not a forced plan.
 
 ## Communication + Decision Rhythm
 
@@ -281,7 +290,7 @@ Between visits, I'm the number for "while you're here next time, can you also…
 |---|---|
 | The Two-Hour House Call | $350 flat |
 | House Calls hourly | $175/hr · 2-hour minimum |
-| Monthly Continuity | starting at $500/month |
+| Retainer continuity | Available for repeat clients · no membership, no subscription |
 
 Time between visits — coordinating the vendor, chasing the part, scheduling the next thing — counts as work, because it is.
 
@@ -466,20 +475,21 @@ Honest note: bags of mostly low-value items sometimes cost more in labor than th
 
 ## Commission
 
-On the net sale price, after platform fees and shipping:
-
-| Category | You | TWLC |
+| Category | You | Dayna |
 |---|---|---|
-| Clothing & Accessories | 45% | 55% |
-| Designer & Luxury | 50% | 50% |
-| Furniture & Significant Home | 50% | 50% |
-| Full Closet Liquidation | 45% | 55% |
+| Clothing & Accessories | 55% | 45% |
+| Designer | 50% | 50% |
+| Furniture & Significant Home Pieces | 50% | 50% |
 
-A signed resale agreement covers every consignment — terms in writing, before anything sells.
+A signed resale agreement covers every consignment — terms in writing, before anything sells. Platform fees and commission details are finalized at intake.
 
 ## Timelines & The 180-Day Review
 
-Good inventory mostly sells inside six to nine months; the standard term is 180 days. At the review, anything unsold gets a decision — keep listing, reroute, return it to you, or donate it. Your preference, asked before anything moves.
+Once your items arrive, intake review takes 7–10 business days — you'll get confirmation of what was received, what's accepted for sale, what may need hold timing, and what doesn't justify resale.
+
+Then it's a long game, not a fast-cash service. Most strong items sell within the first 90 days; nearly everything with real demand finds its buyer within 6 to 9 months. The rhythm: 30 days, performance review. 60 days, pricing adjustment if needed. 90 days, route and markdown review. 180 days, standard term completion — anything unsold gets a decision: keep listing, reroute, return it to you, or donate it. Your preference, asked before anything moves.
+
+Resale rewards patience, not urgency. If immediate cash is the priority, resale may not be the best route — and I'll say so.
 
 Items are pre-owned, estate, or vintage, and are sold honestly as such — wear consistent with category, described plainly, in good faith on both sides.
 
@@ -565,18 +575,18 @@ You go first. I finish the move — the final packing, the storage unit, the res
 
 | | |
 |---|---|
-| Hourly | $150/hr |
-| Flex Block — 10 hours | $1,250 prepaid · never expires |
-| Flex Block — 25 hours | $3,150 prepaid · never expires |
-| Move-In Day | $1,200 flat · studios & 1-bedrooms; larger homes scoped |
+| Hourly | $150/hr · 3-hour minimum |
+| Flex Blocks | 2, 4, or 6-hour reserved work blocks |
+| Modern Move Reset | $1,200 flat day rate · studios & 1-bedrooms, up to 8 hours; larger homes scope as projects |
 | Move Closeout & staged transitions | $150/hr + resale commission on items sold |
+| Larger projects | Quoted by scope, timeline, and intensity of lift |
 
 ## House Calls
 
 | | |
 |---|---|
 | Hourly | $175/hr · 2-hour minimum |
-| Monthly Continuity | starting at $500/month |
+| Retainer continuity | Available for repeat clients · no membership, no subscription |
 
 ## Legacy Inventory & Cataloging
 
@@ -588,18 +598,17 @@ You go first. I finish the move — the final packing, the storage unit, the res
 
 ## Resale & Consignment
 
-| Category | You | TWLC |
+| Category | You | Dayna |
 |---|---|---|
-| Clothing & Accessories | 45% | 55% |
-| Designer & Luxury | 50% | 50% |
-| Furniture & Significant Home | 50% | 50% |
-| Full Closet Liquidation | 45% | 55% |
+| Clothing & Accessories | 55% | 45% |
+| Designer | 50% | 50% |
+| Furniture & Significant Home Pieces | 50% | 50% |
 
-Commission on net sale price. Free pickup. Monthly payouts. 180-day standard term. Agreement required.
+Commission on net sale price. Free pickup. Monthly reporting and payout rhythm. 180-day standard term. Agreement required; platform fees and commission details finalized at intake.
 
 ## Supplies
 
-Starter $150 · Mid $250 · Full $500. Supplies only — bins, systems, hangers, labels — never labor, always approved first.
+Landing bundles (first-night/first-week) $150 · $250 · $500. Pre-Buy Org bundles $150 · $250 · $500. Supplies only — never labor, always approved first. Deeper spaces quoted after walkthrough.
 
 ## The fine print, plainly
 
@@ -616,7 +625,7 @@ The practical realities of living — home organization, move support, house cal
 No, and most clients aren't. A lot of this work runs on a key handoff, photo updates, and quick text approvals. Tell me keep, sell, or donate from your phone, and it's handled by the time you're back.
 
 **Where do you work?**
-Greater Los Angeles. Local travel is built in. I travel for legacy engagements — inherited homes and family projects outside LA are scoped with travel folded in.
+LA base, but not radius-limited. Travel runs on project logic — route-based efficiency, stops built into the flow. Quick asks can often be absorbed into an existing route, and inherited homes or family projects outside LA are scoped with travel folded in.
 
 **What don't you do?**
 Junk hauling, biohazard cleanup, hoarding remediation, heavy moving crews, legal estate administration, caregiving, medical anything, and family arbitration. I coordinate licensed professionals when they're needed — and I'm honest about when they're needed.
@@ -633,14 +642,14 @@ Standard term is 180 days. At the review, unsold items get a decision — keep l
 **Can you help my parents?**
 Yes — and without making it a whole thing. House Calls were practically built for this: tech, errands, small fixes, a patient capable person who treats them like adults. If you're out of town, you get photo updates and a straight report from someone who was actually in the house.
 
-**How do flex blocks work?**
-Prepaid hours — 10 for $1,250 or 25 for $3,150 — used whenever you need them. They never expire. A closet in March, a garage in July, move help in September.
+**How do Flex Blocks work?**
+Reserved 2, 4, or 6-hour work blocks — time already held for when life needs it. Best for task lists that build over time, vendor access days, donation routing, guest prep, move follow-through, and the "I need a 4-hour you" kind of month.
 
 **What's a walkthrough, and when do I need one?**
 For larger projects — whole homes, big moves, legacy work — we walk the space together first, and I scope from what's actually there. Smaller projects skip it; legacy work always starts with it.
 
 **Why is some work $150/hr and some $175/hr?**
-Organization and move work runs $150/hr. House Calls and legacy work run $175/hr with a two-hour minimum — they carry more coordination, more judgment calls, and more between-visit work per hour on site.
+Organization and move work runs $150/hr with a three-hour minimum. House Calls and legacy work run $175/hr with a two-hour minimum — they carry more coordination, more judgment calls, and more between-visit work per hour on site.
 
 **How fast can you come?**
 Often fast. Same-day gets prioritized when the schedule allows, and the Four Hour Reset and Two-Hour House Call are built to book quickly. Rush couriers or special logistics, where needed, are passed through at cost.
