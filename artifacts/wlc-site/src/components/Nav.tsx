@@ -72,16 +72,16 @@ export default function Nav() {
             <img
               src="/assets/wlc-hanger-logo-nobg.png"
               alt="The Well Lived Citizen logo"
-              style={{ height: 38, width: "auto", display: "block", flexShrink: 0 }}
+              style={{ height: 44, width: "auto", display: "block", flexShrink: 0 }}
             />
             <span style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: "0.72rem",
+              fontSize: "0.8rem",
               fontWeight: 800,
-              letterSpacing: "0.22em",
+              letterSpacing: "0.2em",
               color: "var(--ink)",
               textTransform: "uppercase",
-              lineHeight: 1.2,
+              lineHeight: 1.25,
             }}>
               THE WELL<br />LIVED CITIZEN
             </span>

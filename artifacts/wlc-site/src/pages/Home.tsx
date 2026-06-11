@@ -75,32 +75,50 @@ export default function Home() {
     description: "One person for the move, the resale, the storage unit, and the other thing currently ruining your week. Home organization, house calls, legacy inventory, and resale in greater Los Angeles.",
     path: "/",
   });
+
+  const [phraseOne, phraseTwo] = hero.headline.split(/(?<=\.)\s+/);
+
   return (
     <div style={{ backgroundColor: "var(--parchment)", minHeight: "100vh" }}>
       <Nav />
 
       {/* ── HERO ── */}
-      <section style={{ backgroundColor: "var(--ink)", minHeight: "100vh", display: "flex", alignItems: "center", padding: "9rem 0 5rem" }}>
+      <section style={{ backgroundColor: "var(--ink)", padding: "7.5rem 0 5rem" }}>
         <div className="container" style={{ width: "100%" }}>
           <FadeUp>
-            <span className="eyebrow eyebrow-light" style={{ marginBottom: "2rem" }}>The Well Lived Citizen · Los Angeles</span>
-            <h1 className="display-xl" style={{ color: "var(--parchment)", maxWidth: 900 }}>
-              {hero.headline}
-            </h1>
+            <span className="eyebrow eyebrow-light" style={{ fontSize: "1.05rem", letterSpacing: "0.16em", marginBottom: "2rem" }}>The Well Lived Citizen · Los Angeles</span>
+            <div style={{ maxWidth: 860 }}>
+              <h1 style={{ color: "var(--parchment)", margin: 0, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "clamp(1.9rem, 4vw, 3rem)", lineHeight: 1.05, letterSpacing: "-0.02em" }}>
+                {phraseOne}
+              </h1>
+              <p style={{ color: "rgba(248,244,227,0.74)", margin: "0.85rem 0 0", fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(1.02rem, 1.7vw, 1.22rem)", lineHeight: 1.5, maxWidth: 600 }}>
+                A lifeline for the moves, the resale, the messy piles, and the generational tech gap nobody planned for.
+              </p>
+              <h2 style={{ color: "var(--parchment)", margin: "2.25rem 0 0", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "clamp(1.9rem, 4vw, 3rem)", lineHeight: 1.05, letterSpacing: "-0.02em" }}>
+                {phraseTwo}
+              </h2>
+              <p style={{ color: "rgba(248,244,227,0.74)", margin: "0.85rem 0 0", fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(1.02rem, 1.7vw, 1.22rem)", lineHeight: 1.5, maxWidth: 600 }}>
+                The business built for the things nobody quite knows who to call about.
+              </p>
+            </div>
           </FadeUp>
         </div>
       </section>
 
-      {/* ── SUBHERO ── */}
+      {/* ── WHO / WHAT ── */}
       <section style={{ backgroundColor: "var(--parchment)", padding: "6.5rem 0" }}>
         <div className="container">
           <FadeUp>
             <div style={{ maxWidth: 760 }}>
-              <p style={{ fontSize: "1.15rem", fontWeight: 400, color: "var(--ink)", lineHeight: 1.8, marginBottom: "0.5rem" }}>
-                You find me when you've typed:
+              <span className="eyebrow eyebrow-sage">Who's behind it</span>
+              <p style={{ fontSize: "clamp(1.3rem, 2.4vw, 1.7rem)", fontWeight: 700, color: "var(--ink)", lineHeight: 1.35, margin: "0.5rem 0 1.5rem" }}>
+                I'm Dayna. I handle the operational side of life — so you get your time, and your home, back.
               </p>
-              <p style={{ fontSize: "1.3rem", fontWeight: 700, color: "var(--ink)", lineHeight: 1.5, marginBottom: "1.5rem" }}>
-                "Is there a person who..."
+              <p style={{ fontSize: "1.1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.8, margin: "0 0 2.75rem" }}>
+                My background is operations — warehouses, executive teams, fashion and resale — running the kind of complexity most people find overwhelming. The Well Lived Citizen is built for the things that fall between categories: the stuff nobody quite knows who to call about.
+              </p>
+              <p style={{ fontSize: "1.15rem", fontWeight: 700, color: "var(--ink)", lineHeight: 1.5, marginBottom: "1.25rem" }}>
+                You probably found me after typing "Is there a person who…"
               </p>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 2rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
                 {[
@@ -116,11 +134,8 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <p style={{ fontSize: "1.1rem", fontWeight: 400, color: "var(--ink)", lineHeight: 1.8, marginBottom: "0.5rem" }}>
-                Usually what you need falls somewhere between categories.
-              </p>
-              <p style={{ fontSize: "1.1rem", fontWeight: 600, color: "var(--ink)", lineHeight: 1.8 }}>
-                I'm Dayna.
+              <p style={{ fontSize: "1.1rem", fontWeight: 400, color: "var(--ink)", lineHeight: 1.8, margin: 0 }}>
+                Usually what you need falls somewhere between categories. That's the whole job.
               </p>
             </div>
           </FadeUp>
