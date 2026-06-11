@@ -1,6 +1,8 @@
-// Lead capture — emails every contact-form and bag-pickup submission to the
-// owner via Resend. No database required for launch; a lead is never lost.
-// Set RESEND_API_KEY (and optionally CONTACT_TO / CONTACT_FROM) in Netlify env.
+// Lead capture — persists every contact-form and bag-pickup submission to the
+// Supabase `leads` table (the CRM record of truth) AND emails the owner via
+// Resend. Either path failing never loses the lead.
+// Env (Netlify): SUPABASE_URL, SUPABASE_ANON_KEY, RESEND_API_KEY
+// (optional CONTACT_TO / CONTACT_FROM).
 
 export default async (req: Request): Promise<Response> => {
   const json = (body: unknown, status = 200) =>
@@ -22,6 +24,43 @@ export default async (req: Request): Promise<Response> => {
 
   if (!b.name || !b.email) {
     return json({ ok: false, error: "Name and email are required." }, 400);
+  }
+
+  // Persist the lead to Supabase first (the durable CRM record). Best-effort:
+  // a Supabase hiccup must never block the visitor or the email notification.
+  const sbUrl = process.env.SUPABASE_URL;
+  const sbKey = process.env.SUPABASE_ANON_KEY;
+  if (sbUrl && sbKey) {
+    try {
+      const sb = await fetch(`${sbUrl}/rest/v1/leads`, {
+        method: "POST",
+        headers: {
+          apikey: sbKey,
+          Authorization: `Bearer ${sbKey}`,
+          "content-type": "application/json",
+          Prefer: "return=minimal",
+        },
+        body: JSON.stringify({
+          type: b.summary || b.type || "inquiry",
+          name: b.name,
+          email: b.email,
+          phone: b.phone || null,
+          neighborhood: b.neighborhood || null,
+          summary: b.summary || null,
+          situation: b.situation || null,
+          bags_count: b.bagsCount || null,
+          urgency: b.urgency || null,
+          pickup_time_1: b.pickupTime1 || null,
+          pickup_time_2: b.pickupTime2 || null,
+          pickup_method: b.pickupMethod || null,
+          source: "website",
+          raw: b,
+        }),
+      });
+      if (!sb.ok) console.error("Supabase lead insert failed:", sb.status, await sb.text());
+    } catch (err) {
+      console.error("Supabase lead insert error (non-fatal):", err);
+    }
   }
 
   const key = process.env.RESEND_API_KEY;
