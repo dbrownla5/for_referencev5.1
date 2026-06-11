@@ -26,8 +26,9 @@ export default async (req: Request): Promise<Response> => {
     return json({ ok: false, error: "Name and email are required." }, 400);
   }
 
-  // Persist the lead to Supabase first (the durable CRM record). Best-effort:
-  // a Supabase hiccup must never block the visitor or the email notification.
+  // Persist the lead to Supabase first (the durable CRM record of truth).
+  // Best-effort: a Supabase hiccup must never block the visitor.
+  let captured = false;
   const sbUrl = process.env.SUPABASE_URL;
   const sbKey = process.env.SUPABASE_ANON_KEY;
   if (sbUrl && sbKey) {
@@ -57,7 +58,8 @@ export default async (req: Request): Promise<Response> => {
           raw: b,
         }),
       });
-      if (!sb.ok) console.error("Supabase lead insert failed:", sb.status, await sb.text());
+      if (sb.ok) captured = true;
+      else console.error("Supabase lead insert failed:", sb.status, await sb.text());
     } catch (err) {
       console.error("Supabase lead insert error (non-fatal):", err);
     }
@@ -93,6 +95,8 @@ export default async (req: Request): Promise<Response> => {
   // directly so the lead is never silently swallowed.
   if (!key) {
     console.log("LEAD (RESEND_API_KEY not set):\n" + text);
+    // The lead is already saved in Supabase — never show the visitor an error.
+    if (captured) return ok(false);
     return json(
       {
         ok: false,
@@ -117,6 +121,7 @@ export default async (req: Request): Promise<Response> => {
     });
     if (!res.ok) {
       console.error("Resend error:", await res.text());
+      if (captured) return ok(false);
       return json(
         {
           ok: false,
@@ -129,6 +134,7 @@ export default async (req: Request): Promise<Response> => {
     return ok(true);
   } catch (err) {
     console.error("submit error:", err);
+    if (captured) return ok(false);
     return json({ ok: false, error: "Unexpected error." }, 500);
   }
 };
