@@ -17,18 +17,10 @@
 [context.deploy-preview]
   ignore = "/bin/true"
 
-# Lead capture: the site posts to /api/contact and /api/handshake/intake.
-# Route both to the function that emails the lead (via Resend). No database
-# needed for launch — every inquiry reaches the inbox.
+# Route all /api/* requests to the serverless Express backend function.
 [[redirects]]
-  from = "/api/contact"
-  to = "/.netlify/functions/submit"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/api/handshake/intake"
-  to = "/.netlify/functions/submit"
+  from = "/api/*"
+  to = "/.netlify/functions/api"
   status = 200
   force = true
 
