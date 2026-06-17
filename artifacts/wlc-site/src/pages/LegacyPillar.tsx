@@ -101,8 +101,118 @@ export default function LegacyPillar() {
         </div>
       </section>
 
+      {/* ── THE CORE VALUE (PULL-QUOTE) ── */}
+      <section style={{ backgroundColor: "var(--parchment-mid)", padding: "5.5rem 0" }}>
+        <div className="container">
+          <FadeUp>
+            <div style={{ maxWidth: 740, borderLeft: "3px solid var(--sage)", paddingLeft: "1.75rem" }}>
+              <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(1.25rem, 2.5vw, 1.65rem)", lineHeight: 1.5, color: "var(--ink)", marginBottom: "1.5rem" }}>
+                "Legacy isn't really about inventory. It's about informed decisions. It's about context. It's about recognizing value before somebody else accidentally destroys it, donates it, underprices it, overestimates it, ignores it, or rushes through it."
+              </p>
+              <p style={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--ink)", margin: 0 }}>
+                The inventory is the mechanism. The judgment is the value.
+              </p>
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* ── WHY PEOPLE DO THIS ── */}
+      <section style={{ backgroundColor: "var(--parchment)", padding: "6.5rem 0" }}>
+        <div className="container">
+          <FadeUp>
+            <div style={{ maxWidth: 740 }}>
+              <span className="eyebrow eyebrow-sage">Why people do this</span>
+              <h2 className="display-md" style={{ color: "var(--ink)", marginTop: "0.5rem", marginBottom: "1.5rem" }}>
+                Because some decisions are easier when they're made on your timeline.
+              </h2>
+              <p className="body-lg" style={{ marginBottom: "2rem" }}>
+                Not because something is wrong. Not because a decision has to be made tomorrow.
+              </p>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 2.5rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
+                {[
+                  "Before a move.",
+                  "Before a downsize.",
+                  "Before a health event.",
+                  "Before family members are left guessing.",
+                  "Before valuable pieces become another box in a storage unit or another item dropped off without anyone realizing what it was.",
+                ].map((line, i) => (
+                  <li key={i} style={{ fontSize: "1.05rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.6, paddingLeft: "1.25rem", borderLeft: "2px solid var(--sage)" }}>
+                    {line}
+                  </li>
+                ))}
+              </ul>
+              <p className="body-lg" style={{ marginBottom: "2.5rem" }}>
+                A Legacy Inventory creates clarity while the information, context, and decisions are still in your hands:
+              </p>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "2.5rem", marginBottom: "3rem" }}>
+                <div>
+                  <h4 style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--ink)", marginBottom: "0.5rem" }}>Understanding what you own</h4>
+                  <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.6, margin: 0 }}>For some clients, it is simply about mapping out their holdings with clarity.</p>
+                </div>
+                <div>
+                  <h4 style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--ink)", marginBottom: "0.5rem" }}>Creating a plan</h4>
+                  <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.6, margin: 0 }}>For others, it's organizing collections, resale routing, or prep for future transitions.</p>
+                </div>
+                <div>
+                  <h4 style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--ink)", marginBottom: "0.5rem" }}>Relief from zero</h4>
+                  <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.6, margin: 0 }}>For many, it's knowing that if circumstances change, their family isn't starting from scratch.</p>
+                </div>
+              </div>
+              
+              <div style={{ backgroundColor: "var(--parchment-mid)", padding: "2.5rem", borderRadius: "6px", border: "1px solid var(--warm-gray-lt)" }}>
+                <p style={{ fontSize: "1.15rem", fontWeight: 700, color: "var(--ink)", marginBottom: "0.75rem" }}>The goal isn't urgency. The goal is options.</p>
+                <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.6, margin: 0 }}>
+                  More time to make thoughtful decisions. More visibility into what has value. More control over where things go next.
+                </p>
+              </div>
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* ── VALUE & THE "LATER" TRAP ── */}
+      <section style={{ backgroundColor: "var(--parchment-mid)", padding: "6.5rem 0" }}>
+        <div className="container">
+          <FadeUp>
+            <div style={{ maxWidth: 740 }}>
+              <span className="eyebrow eyebrow-sage">Value &amp; Information</span>
+              <h2 className="display-md" style={{ color: "var(--ink)", marginTop: "0.5rem", marginBottom: "1.5rem" }}>
+                Value doesn't disappear just because life gets busy.
+              </h2>
+              <p className="body-lg" style={{ marginBottom: "1.5rem" }}>
+                One of the most common things I hear is: <strong>"My kids don't want it."</strong>
+              </p>
+              <p className="body-lg" style={{ marginBottom: "1.5rem" }}>
+                Sometimes that's true. Sometimes nobody has had the conversation. And sometimes the real issue is that nobody knows what something is, what it's worth, or who might care about it.
+              </p>
+              <p className="body-lg" style={{ marginBottom: "2.5rem" }}>
+                We are entering a moment where more belongings, collections, vintage pieces, and household contents will change hands than ever before. The difference between a thoughtful decision and a rushed one is often information.
+              </p>
+
+              <div style={{ borderLeft: "3px solid var(--sage)", paddingLeft: "1.75rem", marginBottom: "2.5rem" }}>
+                <p style={{ fontSize: "1.1rem", fontWeight: 400, color: "var(--ink)", lineHeight: 1.7, margin: 0 }}>
+                  A lot of people assume they'll deal with it later. Later, they'll sort the collection. Later, they'll figure out what's worth selling. Later, they'll decide what stays, what goes, and what matters.
+                </p>
+                <p style={{ fontSize: "1.1rem", fontWeight: 400, color: "var(--ink)", lineHeight: 1.7, marginTop: "1rem", margin: 0 }}>
+                  But later has a way of turning into storage units, deferred decisions, and family members trying to make sense of things without context.
+                </p>
+              </div>
+
+              <p className="body-lg" style={{ marginBottom: "2rem" }}>
+                Part of this work is identifying what may have financial value, historical value, practical value, or simply personal significance before those decisions are deferred to someone else.
+              </p>
+              
+              <p style={{ fontSize: "clamp(1.15rem, 2.2vw, 1.45rem)", fontWeight: 700, color: "var(--ink)", lineHeight: 1.35, margin: 0 }}>
+                Not everything should be kept. Not everything should be sold. But understanding the difference creates options. And options create better outcomes.
+              </p>
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
       {/* ── WHO THIS IS FOR ── */}
-      <section style={{ backgroundColor: "var(--parchment-mid)", padding: "6rem 0" }}>
+      <section style={{ backgroundColor: "var(--parchment)", padding: "6rem 0" }}>
         <div className="container">
           <FadeUp>
             <div style={{ maxWidth: 820 }}>
@@ -116,27 +226,6 @@ export default function LegacyPillar() {
                   <span style={{ fontSize: "1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.7 }}>{item}</span>
                 </div>
               ))}
-            </div>
-          </FadeUp>
-        </div>
-      </section>
-
-      {/* ── THE CHINA STORY ── */}
-      <section style={{ backgroundColor: "var(--parchment)", padding: "6rem 0" }}>
-        <div className="container">
-          <FadeUp>
-            <div style={{ maxWidth: 740 }}>
-              <div style={{ borderLeft: "3px solid var(--sage)", paddingLeft: "1.75rem", marginBottom: "2.5rem" }}>
-                <p className="body-lg" style={{ marginBottom: "1.5rem" }}>
-                  It's a holiday dinner, looking at china that hasn't been used in years. You wonder if it ever will, knowing three plates are missing, broken in memorable moments over lifetimes. What happens to a set of china passed down two generations, incomplete but once made a new couple feel whole? It can't be worthless, but can't be sold incomplete. Your kids live in small apartments and said, "That's sweet, but we can't take it." So, what happens to something you thought would be with your family forever?
-                </p>
-                <p className="body-lg" style={{ margin: 0 }}>
-                  I help. I look at everything in your home — practical, sentimental, and holding memories — and I listen to them, for as long or as little as you want to tell me their stories. We'll find a way to ensure the things you felt were special — incomplete and all — make it to hands that collect, treasure, and find value in them, sharing in the story a little longer.
-                </p>
-              </div>
-              <p style={{ fontSize: "clamp(1.2rem, 2.4vw, 1.6rem)", fontWeight: 700, color: "var(--ink)", lineHeight: 1.35 }}>
-                This service is the person who can see what is actually there.
-              </p>
             </div>
           </FadeUp>
         </div>

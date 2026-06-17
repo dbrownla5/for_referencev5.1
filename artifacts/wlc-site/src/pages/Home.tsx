@@ -57,13 +57,13 @@ const QUICK_STARTS: { id: string; name: string; subtitle: string; price: string;
       "The little list that never gets shorter — the returns, the install, the vendor to let in, the tech that won't behave — knocked out in one visit by someone who just figures it out.",
   },
   {
-    id: "legacy-inventory",
-    name: "Legacy Inventory & Cataloging",
-    subtitle: "Understand what's there before decisions become urgent.",
-    price: "$175/hr · 2-hour minimum",
-    href: "/legacy-planning",
+    id: "move-closeout",
+    name: "Move Wrap-Up",
+    subtitle: "Close out what the move left behind.",
+    price: "$150/hr",
+    href: "/home-reset-move-support",
     desc:
-      "Document and value what is in a home, building a digital inventory and photo catalog. Getting ahead of the physical volume while you have the energy to decide what stays, what moves on, and what gets remembered.",
+      "You go ahead to the next place. I stay behind and finish the move — the boxes, the storage unit, the resale pile, the loose ends — so you're not managing the last 20% from another state.",
   },
 ];
 
