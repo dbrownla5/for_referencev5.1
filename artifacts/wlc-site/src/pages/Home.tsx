@@ -92,7 +92,7 @@ export default function Home() {
                 {phraseOne}
               </h1>
               <p style={{ color: "rgba(248,244,227,0.74)", margin: "0.85rem 0 0", fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(1.02rem, 1.7vw, 1.22rem)", lineHeight: 1.5, maxWidth: 600 }}>
-                A capable person to handle the things in life that fall between.
+                A capable person for the moves, the resale, the messy piles, and the generational tech gap nobody planned for.
               </p>
               <h2 style={{ color: "var(--parchment)", margin: "2.25rem 0 0", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "clamp(1.9rem, 4vw, 3rem)", lineHeight: 1.05, letterSpacing: "-0.02em" }}>
                 {phraseTwo}
