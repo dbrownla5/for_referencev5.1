@@ -6,25 +6,25 @@ This map lists what is currently available to assemble, with readiness and integ
 
 | Item | Source | Phase | Use case | Readiness |
 |---|---|---|---|---|
-| Recognition-style homepage language | `/home/runner/work/for_referencev5.1/for_referencev5.1/docs/_work/site-copy-inventory.md` | D | Homepage / service intros | High |
-| Gap diagnostic language (“frame with no tools”) | `/home/runner/work/for_referencev5.1/for_referencev5.1/docs/SITE-TOOLING-GAPS.md` | A | Product truth / implementation planning | High |
-| Outcome-sell service phrasing | `/home/runner/work/for_referencev5.1/for_referencev5.1/docs/brand-source/marketing-strategy-2026-06-11.md` | C | Conversion copy / CTA framing | High |
-| Core philosophy and positioning lines | `/home/runner/work/for_referencev5.1/for_referencev5.1/docs/brand-source/Brand-Foundation-Lines.md` | C | Messaging calibration | Medium |
-| Voice constraints and banned-language guidance | `/home/runner/work/for_referencev5.1/for_referencev5.1/docs/BRAND-VOICE.md` | B | Editorial QA | High |
-| Direct founder lineage language | `/home/runner/work/for_referencev5.1/for_referencev5.1/docs/brand-source/dayna-voice-capture-2026-06-11.md` | C | About/background credibility | High |
+| Recognition-style homepage language | `docs/_work/site-copy-inventory.md` | D | Homepage / service intros | High |
+| Gap diagnostic language (“frame with no tools”) | `docs/SITE-TOOLING-GAPS.md` | A | Product truth / implementation planning | High |
+| Outcome-sell service phrasing | `docs/brand-source/marketing-strategy-2026-06-11.md` | C | Conversion copy / CTA framing | High |
+| Core philosophy and positioning lines | `docs/brand-source/Brand-Foundation-Lines.md` | C | Messaging calibration | Medium |
+| Voice constraints and banned-language guidance | `docs/BRAND-VOICE.md` | B | Editorial QA | High |
+| Direct founder lineage language | `docs/brand-source/dayna-voice-capture-2026-06-11.md` | C | About/background credibility | High |
 
 ## Available Tool Library (tagged)
 
 | Tool component | Source | Phase | Readiness | Integration cost |
 |---|---|---|---|---|
-| Contact API route | `/home/runner/work/for_referencev5.1/for_referencev5.1/artifacts/api-server/src/routes/contact.ts` | D | Built | Medium |
-| Handshake API workflow | `/home/runner/work/for_referencev5.1/for_referencev5.1/artifacts/api-server/src/routes/handshake.ts` | D | Built | Medium |
-| Handshake state engine | `/home/runner/work/for_referencev5.1/for_referencev5.1/artifacts/api-server/src/handshake/logic.ts` | D | Built | Low |
-| Voice analysis API | `/home/runner/work/for_referencev5.1/for_referencev5.1/artifacts/api-server/src/routes/voice.ts` | D | Built | Low |
-| Brand constants module | `/home/runner/work/for_referencev5.1/for_referencev5.1/artifacts/wlc-site/src/content/brand.ts` | D | Built | Low |
-| Contact persistence schema | `/home/runner/work/for_referencev5.1/for_referencev5.1/lib/db/src/schema/contact.ts` | D | Built | Low |
-| Handshake persistence schema | `/home/runner/work/for_referencev5.1/for_referencev5.1/lib/db/src/schema/handshake.ts` | D | Built | Low |
-| OpenAPI contract package | `/home/runner/work/for_referencev5.1/for_referencev5.1/lib/api-spec/openapi.yaml` | D | Partial | Medium |
+| Contact API route | `artifacts/api-server/src/routes/contact.ts` | D | Built | Medium |
+| Handshake API workflow | `artifacts/api-server/src/routes/handshake.ts` | D | Built | Medium |
+| Handshake state engine | `artifacts/api-server/src/handshake/logic.ts` | D | Built | Low |
+| Voice analysis API | `artifacts/api-server/src/routes/voice.ts` | D | Built | Low |
+| Brand constants module | `artifacts/wlc-site/src/content/brand.ts` | D | Built | Low |
+| Contact persistence schema | `lib/db/src/schema/contact.ts` | D | Built | Low |
+| Handshake persistence schema | `lib/db/src/schema/handshake.ts` | D | Built | Low |
+| OpenAPI contract package | `lib/api-spec/openapi.yaml` | D | Partial | Medium |
 
 ## Do / Don’t Use Rules (pattern-derived)
 
@@ -41,3 +41,10 @@ This map lists what is currently available to assemble, with readiness and integ
 - Don’t keep duplicate deploy paths untagged; they create silent non-use.
 - Don’t close a wave without documenting what was intentionally not adopted and why.
 
+## Glossary
+
+- **Evidence:** any source artifact (doc/code/audit) treated as input, not final authority.
+- **Phase:** chronology bucket used to preserve sequence when extracting material.
+- **Readiness:** how close a fragment is to immediate reuse (`High`, `Medium`, `Partial`).
+- **Integration cost:** relative effort to connect a fragment into the active lane (`Low`, `Medium`).
+- **Drift risk:** facts or copy diverging across files without a reconciled canonical reference.

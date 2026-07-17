@@ -24,12 +24,12 @@ Goal: extract by chronology, then retain rationale for why pieces were not fully
 
 ### Reusable tool components
 - Handshake route + state logic:
-  - `/home/runner/work/for_referencev5.1/for_referencev5.1/artifacts/api-server/src/routes/handshake.ts`
-  - `/home/runner/work/for_referencev5.1/for_referencev5.1/artifacts/api-server/src/handshake/logic.ts`
-  - `/home/runner/work/for_referencev5.1/for_referencev5.1/lib/db/src/schema/handshake.ts`
+  - `artifacts/api-server/src/routes/handshake.ts`
+  - `artifacts/api-server/src/handshake/logic.ts`
+  - `lib/db/src/schema/handshake.ts`
 - Contact intake path (capture seam):
-  - `/home/runner/work/for_referencev5.1/for_referencev5.1/artifacts/api-server/src/routes/contact.ts`
-  - `/home/runner/work/for_referencev5.1/for_referencev5.1/lib/db/src/schema/contact.ts`
+  - `artifacts/api-server/src/routes/contact.ts`
+  - `lib/db/src/schema/contact.ts`
 
 ### Why parts were not fully used (explicit reasons)
 - Multiple deploy paths created drift between “improved copy/tool” and “live path.”
@@ -67,4 +67,3 @@ Goal: extract by chronology, then retain rationale for why pieces were not fully
 ### Known non-use reasons
 - Late corrective imports conflicted with previously propagated values.
 - Lack of a single reconciliation ledger caused repeated overwrite cycles.
-
