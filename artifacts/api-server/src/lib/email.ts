@@ -129,7 +129,7 @@ export function tplConsentReceived(name: string, decision: string): { subject: s
  * Owner-facing consent notice.
  * `decision` is "approved" when the client accepted the report as-is, or
  * "changes" when they asked to pull items back. `pulledItems` lists the item
- * descriptions the client asked to return.
+ * descriptions (not item IDs) the client asked to return.
  */
 export function tplConsentOwner(name: string, decision: string, pulledItems: string[]): { subject: string; text: string } {
   const lines = [

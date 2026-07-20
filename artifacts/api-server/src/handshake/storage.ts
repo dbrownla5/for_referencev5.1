@@ -53,6 +53,7 @@ export async function listItems(handshakeId: number): Promise<HandshakeItem[]> {
   return db.select().from(handshakeItems).where(eq(handshakeItems.handshakeId, handshakeId));
 }
 
+/** `itemIds` is expected to be a validated list of numeric handshake item IDs. */
 export async function listItemsByIds(handshakeId: number, itemIds: number[]): Promise<HandshakeItem[]> {
   if (itemIds.length === 0) return [];
   return db

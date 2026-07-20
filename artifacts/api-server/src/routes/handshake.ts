@@ -60,11 +60,11 @@ function ownerInbox(): string {
   return process.env.CONTACT_TO || "dayna@thewelllivedcitizen.com";
 }
 
-async function deliverEmail(args: SendArgs): Promise<SendResult> {
+async function deliverEmail(context: string, args: SendArgs): Promise<SendResult> {
   try {
     return await sendEmail(args);
   } catch (err) {
-    logger.error({ err, to: args.to, subject: args.subject }, "Handshake email delivery failed unexpectedly");
+    logger.error({ err, context, to: args.to, subject: args.subject }, "Handshake email delivery failed unexpectedly");
     return {
       delivered: false,
       reason: `Email delivery failed: ${err instanceof Error ? err.message : "unknown error"}`,
@@ -127,8 +127,8 @@ router.post("/handshake/intake", async (req, res) => {
         pickupTime2: hs.pickupTime2,
       });
       const [clientEmail, ownerEmail] = await Promise.all([
-        deliverEmail({ to: hs.clientEmail, subject: clientTpl.subject, text: clientTpl.text }),
-        deliverEmail({ to: ownerInbox(), subject: ownerTpl.subject, text: ownerTpl.text, replyTo: hs.clientEmail }),
+        deliverEmail("intake client notification", { to: hs.clientEmail, subject: clientTpl.subject, text: clientTpl.text }),
+        deliverEmail("intake owner notification", { to: ownerInbox(), subject: ownerTpl.subject, text: ownerTpl.text, replyTo: hs.clientEmail }),
       ]);
       notificationResults = { client: clientEmail, owner: ownerEmail };
       await store.logEvent(hs.id, "intake", "intake_notifications_sent", {
@@ -169,14 +169,14 @@ router.post("/handshake/intake", async (req, res) => {
         `Agreement accepted: ${gate.open ? "YES" : "NO"}${gate.open && b.agreementTimestamp ? ` (${b.agreementTimestamp})` : ""}`,
         b.signatureName ? `Signed: ${b.signatureName}` : "",
       ].filter(Boolean);
-      const emailRes = await sendEmail({
+      const ownerEmail = await sendEmail({
         to,
         subject: `[WLC] New intake — ${b.name}${b.summary ? ` (${b.summary})` : ""}`,
         text: lines.join("\n"),
         replyTo: b.email,
       });
       void dispatchWebhook({ kind: "handshake_intake", opened: gate.open, captured: "email", ...b });
-      logger.info({ name: b.name, emailed: emailRes.delivered }, "Handshake intake captured via email fallback");
+      logger.info({ name: b.name, emailed: ownerEmail.delivered }, "Handshake intake captured via email fallback");
       res.json({
         ok: true,
         id: null,
@@ -185,10 +185,10 @@ router.post("/handshake/intake", async (req, res) => {
         blocked: gate.blocked,
         reason: gate.reason,
         captured: "email",
-        emailed: emailRes.delivered,
+        emailed: ownerEmail.delivered,
         emailStatus: {
           client: { delivered: false, reason: "fallback-mode" },
-          owner: emailRes,
+          owner: ownerEmail,
         },
       });
     } catch (err2) {
@@ -448,8 +448,8 @@ router.post("/handshake/consent/:token", async (req, res) => {
   const tpl = tplConsentReceived(hs.clientName, decision);
   const ownerTpl = tplConsentOwner(hs.clientName, decision, pulledItemDescriptions);
   const [clientEmail, ownerEmail] = await Promise.all([
-    deliverEmail({ to: hs.clientEmail, subject: tpl.subject, text: tpl.text }),
-    deliverEmail({ to: ownerInbox(), subject: ownerTpl.subject, text: ownerTpl.text, replyTo: hs.clientEmail }),
+    deliverEmail("consent client notification", { to: hs.clientEmail, subject: tpl.subject, text: tpl.text }),
+    deliverEmail("consent owner notification", { to: ownerInbox(), subject: ownerTpl.subject, text: ownerTpl.text, replyTo: hs.clientEmail }),
   ]);
   const notificationResults = { client: clientEmail, owner: ownerEmail };
   await store.logEvent(hs.id, "consent", "client_decision", {
