@@ -21,6 +21,8 @@ import { Router, type IRouter } from "express";
 import { logger } from "../lib/logger";
 import {
   sendEmail,
+  type SendArgs,
+  type SendResult,
   tplConsentOwner,
   tplDayBefore,
   tplIntakeClient,
@@ -56,6 +58,15 @@ function publicBase(): string {
 
 function ownerInbox(): string {
   return process.env.CONTACT_TO || "dayna@thewelllivedcitizen.com";
+}
+
+async function deliverEmail(args: SendArgs): Promise<SendResult> {
+  try {
+    return await sendEmail(args);
+  } catch (err) {
+    logger.error({ err, to: args.to, subject: args.subject }, "Handshake email delivery threw unexpectedly");
+    return { delivered: false, reason: "Email send threw before a result was returned." };
+  }
 }
 
 // ── Intake (the gate) ─────────────────────────────────────────────────────────
@@ -112,8 +123,8 @@ router.post("/handshake/intake", async (req, res) => {
         pickupTime2: hs.pickupTime2,
       });
       const [clientEmail, ownerEmail] = await Promise.all([
-        sendEmail({ to: hs.clientEmail, subject: clientTpl.subject, text: clientTpl.text }),
-        sendEmail({ to: ownerInbox(), subject: ownerTpl.subject, text: ownerTpl.text, replyTo: hs.clientEmail }),
+        deliverEmail({ to: hs.clientEmail, subject: clientTpl.subject, text: clientTpl.text }),
+        deliverEmail({ to: ownerInbox(), subject: ownerTpl.subject, text: ownerTpl.text, replyTo: hs.clientEmail }),
       ]);
       await store.logEvent(hs.id, "intake", "intake_notifications_sent", {
         clientEmailDelivered: clientEmail.delivered,
@@ -423,8 +434,8 @@ router.post("/handshake/consent/:token", async (req, res) => {
     items.filter((item) => pulledIds.includes(item.id)).map((item) => item.description),
   );
   const [clientEmail, ownerEmail] = await Promise.all([
-    sendEmail({ to: hs.clientEmail, subject: tpl.subject, text: tpl.text }),
-    sendEmail({ to: ownerInbox(), subject: ownerTpl.subject, text: ownerTpl.text, replyTo: hs.clientEmail }),
+    deliverEmail({ to: hs.clientEmail, subject: tpl.subject, text: tpl.text }),
+    deliverEmail({ to: ownerInbox(), subject: ownerTpl.subject, text: ownerTpl.text, replyTo: hs.clientEmail }),
   ]);
   await store.logEvent(hs.id, "consent", "client_decision", {
     decision,
