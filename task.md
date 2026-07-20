@@ -14,7 +14,7 @@ Use this TODO list to organize work. Mark tasks as `[/]` (in progress) and `[x]`
 ## 2. Infrastructure & Tool Integrations (Supabase, Resend, Netlify, Render)
 * [x] **Database Setup**: Configure the Supabase database URL and push the Drizzle database schema (`pnpm --filter @workspace/db run push`).
 * [x] **Secret Management**: Set up Environment Variables in Render/Netlify and `.env` (`DATABASE_URL`, `RESEND_API_KEY`, `PUBLIC_SITE_URL`).
-* [ ] **Transactional Email Integration**: Wire up Resend API key to automate mail notifications for the 9-step resale handshake.
+* [x] **Transactional Email Integration**: Wire up Resend API key to automate mail notifications for the 9-step resale handshake.
 * [ ] **Netlify & Render Deployment Setup**: Link Netlify for frontend hosting and Render for the API backend.
 
 ---

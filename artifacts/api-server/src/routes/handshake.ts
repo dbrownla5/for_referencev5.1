@@ -21,7 +21,12 @@ import { Router, type IRouter } from "express";
 import { logger } from "../lib/logger";
 import {
   sendEmail,
+  type SendArgs,
+  type SendResult,
+  tplConsentOwner,
   tplDayBefore,
+  tplIntakeClient,
+  tplIntakeOwner,
   tplCustody,
   tplReport,
   tplConsentReceived,
@@ -49,6 +54,26 @@ router.get("/handshake/dashboard", (_req, res) => {
 
 function publicBase(): string {
   return process.env.PUBLIC_SITE_URL || "https://thewelllivedcitizen.com";
+}
+
+function ownerInbox(): string {
+  return process.env.CONTACT_TO || "dayna@thewelllivedcitizen.com";
+}
+
+function buildEmailStatus(client: SendResult, owner: SendResult) {
+  return { client, owner };
+}
+
+async function deliverEmail(context: string, args: SendArgs): Promise<SendResult> {
+  try {
+    return await sendEmail(args);
+  } catch (err) {
+    logger.error({ err, context, to: args.to, subject: args.subject }, "Handshake email delivery failed unexpectedly");
+    return {
+      delivered: false,
+      reason: err instanceof Error ? err.message : "unknown error",
+    };
+  }
 }
 
 // ── Intake (the gate) ─────────────────────────────────────────────────────────
@@ -89,12 +114,40 @@ router.post("/handshake/intake", async (req, res) => {
       step: "intake",
     });
     await store.logEvent(hs.id, "intake", gate.open ? "record_opened" : "blocked_no_signature", { reason: gate.reason });
+    let notificationResults: { client: SendResult; owner: SendResult } | null = null;
+
+    if (gate.open) {
+      const clientTpl = tplIntakeClient(hs.clientName, hs.summary);
+      const ownerTpl = tplIntakeOwner({
+        clientName: hs.clientName,
+        clientEmail: hs.clientEmail,
+        clientPhone: hs.clientPhone,
+        summary: hs.summary,
+        neighborhood: hs.neighborhood,
+        bagsCount: hs.bagsCount,
+        estimatedItems: hs.estimatedItems,
+        pickupMethod: hs.pickupMethod,
+        pickupTime1: hs.pickupTime1,
+        pickupTime2: hs.pickupTime2,
+      });
+      const [clientEmail, ownerEmail] = await Promise.all([
+        deliverEmail("intake client notification", { to: hs.clientEmail, subject: clientTpl.subject, text: clientTpl.text }),
+        deliverEmail("intake owner notification", { to: ownerInbox(), subject: ownerTpl.subject, text: ownerTpl.text, replyTo: hs.clientEmail }),
+      ]);
+      notificationResults = buildEmailStatus(clientEmail, ownerEmail);
+      await store.logEvent(hs.id, "intake", "intake_notifications_sent", {
+        clientEmailDelivered: clientEmail.delivered,
+        clientEmailReason: clientEmail.reason,
+        ownerEmailDelivered: ownerEmail.delivered,
+        ownerEmailReason: ownerEmail.reason,
+      });
+    }
 
     // Forward to external CRM (no-op if WEBHOOK_URL unset).
     void dispatchWebhook({ kind: "handshake_intake", id: hs.id, token: hs.token, opened: gate.open, ...b });
 
     logger.info({ id: hs.id, open: gate.open }, "Handshake intake");
-    res.json({ ok: true, id: hs.id, token: hs.token, opened: gate.open, blocked: gate.blocked, reason: gate.reason });
+    res.json({ ok: true, id: hs.id, token: hs.token, opened: gate.open, blocked: gate.blocked, reason: gate.reason, emailStatus: notificationResults });
   } catch (err) {
     // Database not provisioned yet (no DATABASE_URL) or DB write failed.
     // Never lose a lead: email the intake to the owner and still confirm success
@@ -120,15 +173,25 @@ router.post("/handshake/intake", async (req, res) => {
         `Agreement accepted: ${gate.open ? "YES" : "NO"}${gate.open && b.agreementTimestamp ? ` (${b.agreementTimestamp})` : ""}`,
         b.signatureName ? `Signed: ${b.signatureName}` : "",
       ].filter(Boolean);
-      const emailRes = await sendEmail({
+      const ownerEmail = await sendEmail({
         to,
         subject: `[WLC] New intake — ${b.name}${b.summary ? ` (${b.summary})` : ""}`,
         text: lines.join("\n"),
         replyTo: b.email,
       });
       void dispatchWebhook({ kind: "handshake_intake", opened: gate.open, captured: "email", ...b });
-      logger.info({ name: b.name, emailed: emailRes.delivered }, "Handshake intake captured via email fallback");
-      res.json({ ok: true, id: null, token: null, opened: gate.open, blocked: gate.blocked, reason: gate.reason, captured: "email", emailed: emailRes.delivered });
+      logger.info({ name: b.name, emailed: ownerEmail.delivered }, "Handshake intake captured via email fallback");
+      res.json({
+        ok: true,
+        id: null,
+        token: null,
+        opened: gate.open,
+        blocked: gate.blocked,
+        reason: gate.reason,
+        captured: "email",
+        emailed: ownerEmail.delivered,
+        emailStatus: buildEmailStatus({ delivered: false, reason: "fallback-mode" }, ownerEmail),
+      });
     } catch (err2) {
       logger.error({ err: err2 }, "Handshake intake email fallback also failed");
       res.status(500).json({ ok: false, error: "Could not save submission." });
@@ -382,11 +445,29 @@ router.post("/handshake/consent/:token", async (req, res) => {
     step: "review",
     reviewAt: now,
   });
+  const pulledItemDescriptions = (await store.listItemsByIds(hs.id, pulledIds)).map((item) => item.description);
   const tpl = tplConsentReceived(hs.clientName, decision);
-  await sendEmail({ to: hs.clientEmail, subject: tpl.subject, text: tpl.text });
-  await store.logEvent(hs.id, "consent", "client_decision", { decision, pulledIds });
+  const ownerTpl = tplConsentOwner(hs.clientName, decision, pulledItemDescriptions);
+  const [clientEmail, ownerEmail] = await Promise.all([
+    deliverEmail("consent client notification", { to: hs.clientEmail, subject: tpl.subject, text: tpl.text }),
+    deliverEmail("consent owner notification", { to: ownerInbox(), subject: ownerTpl.subject, text: ownerTpl.text, replyTo: hs.clientEmail }),
+  ]);
+  const notificationResults = buildEmailStatus(clientEmail, ownerEmail);
+  await store.logEvent(hs.id, "consent", "client_decision", {
+    decision,
+    pulledIds,
+    clientEmailDelivered: clientEmail.delivered,
+    clientEmailReason: clientEmail.reason,
+    ownerEmailDelivered: ownerEmail.delivered,
+    ownerEmailReason: ownerEmail.reason,
+  });
 
-  res.json({ ok: true, decision, step: updated.step });
+  res.json({
+    ok: true,
+    decision,
+    step: updated.step,
+    emailStatus: notificationResults,
+  });
 });
 
 export default router;

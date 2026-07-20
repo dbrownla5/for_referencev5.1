@@ -1,6 +1,7 @@
 # Repository Extraction — Wave Tracker
 
 Purpose: run repo extraction as evidence work, not truth declaration.
+Current refinement: collection, judgment, and consolidation now live in separate artifacts so the business model stays readable.
 
 ## Operating rule (locked for this run)
 
@@ -22,7 +23,11 @@ Purpose: run repo extraction as evidence work, not truth declaration.
   - [x] Pull reusable tool components by bucket
   - [x] Log drift / abandonment reasons per extracted item
 - [ ] **Wave 3 — Cross-repo expansion**
+  - [x] Publish founder-truth checkpoint (`docs/_work/founder-truth-checkpoint.md`)
+  - [x] Publish business-fragment parsing table (`docs/_work/business-fragment-parsing-table.md`)
+  - [x] Publish final target map (`docs/_work/final-target-map.md`)
   - [ ] Add next repositories into ledger using same fields
+  - [ ] Add fragment rows from the next repositories into the parsing table
   - [ ] Merge duplicate fragments into one reusable parts bin
   - [ ] Score each tool for integration readiness
 - [ ] **Wave 4 — Consolidation**

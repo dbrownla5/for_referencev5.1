@@ -4,7 +4,7 @@
  * client from @workspace/db.
  */
 import { randomBytes } from "node:crypto";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, inArray, and } from "drizzle-orm";
 import {
   db,
   handshakes,
@@ -51,6 +51,15 @@ export async function updateHandshake(id: number, patch: Partial<InsertHandshake
 
 export async function listItems(handshakeId: number): Promise<HandshakeItem[]> {
   return db.select().from(handshakeItems).where(eq(handshakeItems.handshakeId, handshakeId));
+}
+
+/** `itemIds` is expected to be a validated list of numeric handshake item IDs. */
+export async function listItemsByIds(handshakeId: number, itemIds: number[]): Promise<HandshakeItem[]> {
+  if (itemIds.length === 0) return [];
+  return db
+    .select()
+    .from(handshakeItems)
+    .where(and(eq(handshakeItems.handshakeId, handshakeId), inArray(handshakeItems.id, itemIds)));
 }
 
 export async function addItem(data: InsertHandshakeItem): Promise<HandshakeItem> {

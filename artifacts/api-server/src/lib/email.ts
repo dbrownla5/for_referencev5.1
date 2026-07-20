@@ -60,6 +60,49 @@ export function tplDayBefore(name: string, when: string): { subject: string; tex
   };
 }
 
+export function tplIntakeClient(name: string, summary?: string | null): { subject: string; text: string } {
+  const service = summary ? ` for ${summary}` : "";
+  return {
+    subject: "Your pickup request is in",
+    text: `Hi ${name},\n\nWe got your signed pickup request${service}. I'll reach out with the next step and your pickup timing.${SIG}`,
+  };
+}
+
+interface IntakeOwnerArgs {
+  clientName: string;
+  clientEmail: string;
+  clientPhone?: string | null;
+  summary?: string | null;
+  neighborhood?: string | null;
+  bagsCount?: string | null;
+  estimatedItems?: string | null;
+  pickupMethod?: string | null;
+  pickupTime1?: string | null;
+  pickupTime2?: string | null;
+}
+
+export function tplIntakeOwner(args: IntakeOwnerArgs): { subject: string; text: string } {
+  const lines = [
+    "New signed resale intake",
+    "",
+    `Client: ${args.clientName}`,
+    `Email: ${args.clientEmail}`,
+    args.clientPhone ? `Phone: ${args.clientPhone}` : "",
+    args.summary ? `Service: ${args.summary}` : "",
+    args.neighborhood ? `Neighborhood: ${args.neighborhood}` : "",
+    args.bagsCount ? `Bags: ${args.bagsCount}` : "",
+    args.estimatedItems ? `Estimated items: ${args.estimatedItems}` : "",
+    args.pickupMethod ? `Pickup method: ${args.pickupMethod}` : "",
+    args.pickupTime1 ? `Pickup window 1: ${args.pickupTime1}` : "",
+    args.pickupTime2 ? `Pickup window 2: ${args.pickupTime2}` : "",
+  ].filter(Boolean);
+
+  return {
+    subject: `[WLC] New resale intake — ${args.clientName}`,
+    text: lines.join("\n"),
+  };
+}
+
 export function tplCustody(name: string): { subject: string; text: string } {
   return {
     subject: "I've got your things — here's what happens next",
@@ -80,6 +123,29 @@ export function tplConsentReceived(name: string, decision: string): { subject: s
       ? "Got your changes — I've pulled the items you flagged and they'll be returned to you. Everything else proceeds."
       : "Got your approval — everything proceeds as listed.";
   return { subject: "Got it — thank you", text: `Hi ${name},\n\n${body}${SIG}` };
+}
+
+/**
+ * Owner-facing consent notice.
+ * `decision` is "approved" when the client accepted the report as-is, or
+ * "changes" when they asked to pull items back. `pulledItemDescriptions` lists the item
+ * descriptions (not item IDs) the client asked to return.
+ */
+export function tplConsentOwner(name: string, decision: string, pulledItemDescriptions: string[]): { subject: string; text: string } {
+  const lines = [
+    `Client consent received for ${name}.`,
+    "",
+    `Decision: ${decision === "changes" ? "Client requested changes" : "Approved as listed"}`,
+  ];
+
+  if (pulledItemDescriptions.length > 0) {
+    lines.push("", "Pulled items:", ...pulledItemDescriptions.map((item) => `- ${item}`));
+  }
+
+  return {
+    subject: `[WLC] Consent received — ${name}`,
+    text: lines.join("\n"),
+  };
 }
 
 export function tplPayout(name: string, total: string, when: string): { subject: string; text: string } {
