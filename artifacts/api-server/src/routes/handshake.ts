@@ -110,7 +110,7 @@ router.post("/handshake/intake", async (req, res) => {
       step: "intake",
     });
     await store.logEvent(hs.id, "intake", gate.open ? "record_opened" : "blocked_no_signature", { reason: gate.reason });
-    let emailStatus: { client: SendResult; owner: SendResult } | null = null;
+    let notificationResults: { client: SendResult; owner: SendResult } | null = null;
 
     if (gate.open) {
       const clientTpl = tplIntakeClient(hs.clientName, hs.summary);
@@ -130,7 +130,7 @@ router.post("/handshake/intake", async (req, res) => {
         deliverEmail({ to: hs.clientEmail, subject: clientTpl.subject, text: clientTpl.text }),
         deliverEmail({ to: ownerInbox(), subject: ownerTpl.subject, text: ownerTpl.text, replyTo: hs.clientEmail }),
       ]);
-      emailStatus = { client: clientEmail, owner: ownerEmail };
+      notificationResults = { client: clientEmail, owner: ownerEmail };
       await store.logEvent(hs.id, "intake", "intake_notifications_sent", {
         clientEmailDelivered: clientEmail.delivered,
         clientEmailReason: clientEmail.reason,
@@ -143,7 +143,7 @@ router.post("/handshake/intake", async (req, res) => {
     void dispatchWebhook({ kind: "handshake_intake", id: hs.id, token: hs.token, opened: gate.open, ...b });
 
     logger.info({ id: hs.id, open: gate.open }, "Handshake intake");
-    res.json({ ok: true, id: hs.id, token: hs.token, opened: gate.open, blocked: gate.blocked, reason: gate.reason, emailStatus });
+    res.json({ ok: true, id: hs.id, token: hs.token, opened: gate.open, blocked: gate.blocked, reason: gate.reason, emailStatus: notificationResults });
   } catch (err) {
     // Database not provisioned yet (no DATABASE_URL) or DB write failed.
     // Never lose a lead: email the intake to the owner and still confirm success
@@ -444,17 +444,14 @@ router.post("/handshake/consent/:token", async (req, res) => {
     step: "review",
     reviewAt: now,
   });
-  const pulledItemDescriptions =
-    pulledIds.length > 0
-      ? (await store.listItems(hs.id)).filter((item) => pulledIds.includes(item.id)).map((item) => item.description)
-      : [];
+  const pulledItemDescriptions = (await store.listItemsByIds(hs.id, pulledIds)).map((item) => item.description);
   const tpl = tplConsentReceived(hs.clientName, decision);
   const ownerTpl = tplConsentOwner(hs.clientName, decision, pulledItemDescriptions);
   const [clientEmail, ownerEmail] = await Promise.all([
     deliverEmail({ to: hs.clientEmail, subject: tpl.subject, text: tpl.text }),
     deliverEmail({ to: ownerInbox(), subject: ownerTpl.subject, text: ownerTpl.text, replyTo: hs.clientEmail }),
   ]);
-  const emailStatus = { client: clientEmail, owner: ownerEmail };
+  const notificationResults = { client: clientEmail, owner: ownerEmail };
   await store.logEvent(hs.id, "consent", "client_decision", {
     decision,
     pulledIds,
@@ -468,7 +465,7 @@ router.post("/handshake/consent/:token", async (req, res) => {
     ok: true,
     decision,
     step: updated.step,
-    emailStatus,
+    emailStatus: notificationResults,
   });
 });
 

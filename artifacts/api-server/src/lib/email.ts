@@ -63,7 +63,7 @@ export function tplDayBefore(name: string, when: string): { subject: string; tex
 export function tplIntakeClient(name: string, summary?: string | null): { subject: string; text: string } {
   const service = summary ? ` for ${summary}` : "";
   return {
-    subject: "You're on my list",
+    subject: "Your pickup request is in",
     text: `Hi ${name},\n\nI got your signed pickup request${service}. I'll reach out with the next step and your pickup timing.${SIG}`,
   };
 }
