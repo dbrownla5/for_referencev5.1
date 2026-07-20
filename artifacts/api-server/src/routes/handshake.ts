@@ -60,6 +60,10 @@ function ownerInbox(): string {
   return process.env.CONTACT_TO || "dayna@thewelllivedcitizen.com";
 }
 
+function buildEmailStatus(client: SendResult, owner: SendResult) {
+  return { client, owner };
+}
+
 async function deliverEmail(context: string, args: SendArgs): Promise<SendResult> {
   try {
     return await sendEmail(args);
@@ -67,7 +71,7 @@ async function deliverEmail(context: string, args: SendArgs): Promise<SendResult
     logger.error({ err, context, to: args.to, subject: args.subject }, "Handshake email delivery failed unexpectedly");
     return {
       delivered: false,
-      reason: `Email delivery failed: ${err instanceof Error ? err.message : "unknown error"}`,
+      reason: err instanceof Error ? err.message : "unknown error",
     };
   }
 }
@@ -130,7 +134,7 @@ router.post("/handshake/intake", async (req, res) => {
         deliverEmail("intake client notification", { to: hs.clientEmail, subject: clientTpl.subject, text: clientTpl.text }),
         deliverEmail("intake owner notification", { to: ownerInbox(), subject: ownerTpl.subject, text: ownerTpl.text, replyTo: hs.clientEmail }),
       ]);
-      notificationResults = { client: clientEmail, owner: ownerEmail };
+      notificationResults = buildEmailStatus(clientEmail, ownerEmail);
       await store.logEvent(hs.id, "intake", "intake_notifications_sent", {
         clientEmailDelivered: clientEmail.delivered,
         clientEmailReason: clientEmail.reason,
@@ -186,10 +190,7 @@ router.post("/handshake/intake", async (req, res) => {
         reason: gate.reason,
         captured: "email",
         emailed: ownerEmail.delivered,
-        emailStatus: {
-          client: { delivered: false, reason: "fallback-mode" },
-          owner: ownerEmail,
-        },
+        emailStatus: buildEmailStatus({ delivered: false, reason: "fallback-mode" }, ownerEmail),
       });
     } catch (err2) {
       logger.error({ err: err2 }, "Handshake intake email fallback also failed");
@@ -451,7 +452,7 @@ router.post("/handshake/consent/:token", async (req, res) => {
     deliverEmail("consent client notification", { to: hs.clientEmail, subject: tpl.subject, text: tpl.text }),
     deliverEmail("consent owner notification", { to: ownerInbox(), subject: ownerTpl.subject, text: ownerTpl.text, replyTo: hs.clientEmail }),
   ]);
-  const notificationResults = { client: clientEmail, owner: ownerEmail };
+  const notificationResults = buildEmailStatus(clientEmail, ownerEmail);
   await store.logEvent(hs.id, "consent", "client_decision", {
     decision,
     pulledIds,

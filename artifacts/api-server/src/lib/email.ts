@@ -64,7 +64,7 @@ export function tplIntakeClient(name: string, summary?: string | null): { subjec
   const service = summary ? ` for ${summary}` : "";
   return {
     subject: "Your pickup request is in",
-    text: `Hi ${name},\n\nI got your signed pickup request${service}. I'll reach out with the next step and your pickup timing.${SIG}`,
+    text: `Hi ${name},\n\nWe got your signed pickup request${service}. I'll reach out with the next step and your pickup timing.${SIG}`,
   };
 }
 
@@ -128,18 +128,18 @@ export function tplConsentReceived(name: string, decision: string): { subject: s
 /**
  * Owner-facing consent notice.
  * `decision` is "approved" when the client accepted the report as-is, or
- * "changes" when they asked to pull items back. `pulledItems` lists the item
+ * "changes" when they asked to pull items back. `pulledItemDescriptions` lists the item
  * descriptions (not item IDs) the client asked to return.
  */
-export function tplConsentOwner(name: string, decision: string, pulledItems: string[]): { subject: string; text: string } {
+export function tplConsentOwner(name: string, decision: string, pulledItemDescriptions: string[]): { subject: string; text: string } {
   const lines = [
     `Client consent received for ${name}.`,
     "",
     `Decision: ${decision === "changes" ? "Client requested changes" : "Approved as listed"}`,
   ];
 
-  if (pulledItems.length > 0) {
-    lines.push("", "Pulled items:", ...pulledItems.map((item) => `- ${item}`));
+  if (pulledItemDescriptions.length > 0) {
+    lines.push("", "Pulled items:", ...pulledItemDescriptions.map((item) => `- ${item}`));
   }
 
   return {
