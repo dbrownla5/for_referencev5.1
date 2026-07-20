@@ -1,6 +1,11 @@
 # Master Evidence Ledger (Baseline: current active workspace checkout for this task)
 
 This ledger is evidence-first. It does not declare a final brand truth.
+Use it for **collection** only.
+Pair it with:
+- `docs/_work/founder-truth-checkpoint.md` for the current founder-truth read
+- `docs/_work/business-fragment-parsing-table.md` for row-by-row judgment
+- `docs/_work/final-target-map.md` for consolidation
 
 | Source | Date | Brand context | Copy fragments (pullable) | Tool fragments (pullable) | Confidence | Why not used / drift reason |
 |---|---|---|---|---|---|---|
