@@ -21,7 +21,10 @@ import { Router, type IRouter } from "express";
 import { logger } from "../lib/logger";
 import {
   sendEmail,
+  tplConsentOwner,
   tplDayBefore,
+  tplIntakeClient,
+  tplIntakeOwner,
   tplCustody,
   tplReport,
   tplConsentReceived,
@@ -49,6 +52,10 @@ router.get("/handshake/dashboard", (_req, res) => {
 
 function publicBase(): string {
   return process.env.PUBLIC_SITE_URL || "https://thewelllivedcitizen.com";
+}
+
+function ownerInbox(): string {
+  return process.env.CONTACT_TO || "dayna@thewelllivedcitizen.com";
 }
 
 // ── Intake (the gate) ─────────────────────────────────────────────────────────
@@ -89,6 +96,32 @@ router.post("/handshake/intake", async (req, res) => {
       step: "intake",
     });
     await store.logEvent(hs.id, "intake", gate.open ? "record_opened" : "blocked_no_signature", { reason: gate.reason });
+
+    if (gate.open) {
+      const clientTpl = tplIntakeClient(hs.clientName, hs.summary);
+      const ownerTpl = tplIntakeOwner({
+        clientName: hs.clientName,
+        clientEmail: hs.clientEmail,
+        clientPhone: hs.clientPhone,
+        summary: hs.summary,
+        neighborhood: hs.neighborhood,
+        bagsCount: hs.bagsCount,
+        estimatedItems: hs.estimatedItems,
+        pickupMethod: hs.pickupMethod,
+        pickupTime1: hs.pickupTime1,
+        pickupTime2: hs.pickupTime2,
+      });
+      const [clientEmail, ownerEmail] = await Promise.all([
+        sendEmail({ to: hs.clientEmail, subject: clientTpl.subject, text: clientTpl.text }),
+        sendEmail({ to: ownerInbox(), subject: ownerTpl.subject, text: ownerTpl.text, replyTo: hs.clientEmail }),
+      ]);
+      await store.logEvent(hs.id, "intake", "intake_notifications_sent", {
+        clientEmailDelivered: clientEmail.delivered,
+        clientEmailReason: clientEmail.reason,
+        ownerEmailDelivered: ownerEmail.delivered,
+        ownerEmailReason: ownerEmail.reason,
+      });
+    }
 
     // Forward to external CRM (no-op if WEBHOOK_URL unset).
     void dispatchWebhook({ kind: "handshake_intake", id: hs.id, token: hs.token, opened: gate.open, ...b });
@@ -371,6 +404,7 @@ router.post("/handshake/consent/:token", async (req, res) => {
   const pulledIds: number[] = Array.isArray(req.body?.pulledItemIds) ? req.body.pulledItemIds.map(Number) : [];
   const decision = pulledIds.length > 0 ? "changes" : "approved";
   const now = new Date();
+  const items = await store.listItems(hs.id);
 
   for (const itemId of pulledIds) {
     await store.updateItem(itemId, { clientPulled: true, disposition: "return" });
@@ -383,10 +417,25 @@ router.post("/handshake/consent/:token", async (req, res) => {
     reviewAt: now,
   });
   const tpl = tplConsentReceived(hs.clientName, decision);
-  await sendEmail({ to: hs.clientEmail, subject: tpl.subject, text: tpl.text });
-  await store.logEvent(hs.id, "consent", "client_decision", { decision, pulledIds });
+  const ownerTpl = tplConsentOwner(
+    hs.clientName,
+    decision,
+    items.filter((item) => pulledIds.includes(item.id)).map((item) => item.description),
+  );
+  const [clientEmail, ownerEmail] = await Promise.all([
+    sendEmail({ to: hs.clientEmail, subject: tpl.subject, text: tpl.text }),
+    sendEmail({ to: ownerInbox(), subject: ownerTpl.subject, text: ownerTpl.text, replyTo: hs.clientEmail }),
+  ]);
+  await store.logEvent(hs.id, "consent", "client_decision", {
+    decision,
+    pulledIds,
+    clientEmailDelivered: clientEmail.delivered,
+    clientEmailReason: clientEmail.reason,
+    ownerEmailDelivered: ownerEmail.delivered,
+    ownerEmailReason: ownerEmail.reason,
+  });
 
-  res.json({ ok: true, decision, step: updated.step });
+  res.json({ ok: true, decision, step: updated.step, emailDelivered: clientEmail.delivered, ownerEmailDelivered: ownerEmail.delivered });
 });
 
 export default router;
