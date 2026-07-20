@@ -64,7 +64,7 @@ async function deliverEmail(args: SendArgs): Promise<SendResult> {
   try {
     return await sendEmail(args);
   } catch (err) {
-    logger.error({ err, to: args.to, subject: args.subject }, "Handshake email delivery threw unexpectedly");
+    logger.error({ err, to: args.to, subject: args.subject }, "Handshake email delivery failed unexpectedly");
     return {
       delivered: false,
       reason: `Email delivery failed: ${err instanceof Error ? err.message : "unknown error"}`,
@@ -177,7 +177,17 @@ router.post("/handshake/intake", async (req, res) => {
       });
       void dispatchWebhook({ kind: "handshake_intake", opened: gate.open, captured: "email", ...b });
       logger.info({ name: b.name, emailed: emailRes.delivered }, "Handshake intake captured via email fallback");
-      res.json({ ok: true, id: null, token: null, opened: gate.open, blocked: gate.blocked, reason: gate.reason, captured: "email", emailed: emailRes.delivered });
+      res.json({
+        ok: true,
+        id: null,
+        token: null,
+        opened: gate.open,
+        blocked: gate.blocked,
+        reason: gate.reason,
+        captured: "email",
+        emailed: emailRes.delivered,
+        emailStatus: { client: null, owner: emailRes },
+      });
     } catch (err2) {
       logger.error({ err: err2 }, "Handshake intake email fallback also failed");
       res.status(500).json({ ok: false, error: "Could not save submission." });
@@ -455,8 +465,6 @@ router.post("/handshake/consent/:token", async (req, res) => {
     ok: true,
     decision,
     step: updated.step,
-    emailDelivered: clientEmail.delivered,
-    ownerEmailDelivered: ownerEmail.delivered,
     emailStatus,
   });
 });
