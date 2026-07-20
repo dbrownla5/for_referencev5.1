@@ -186,7 +186,10 @@ router.post("/handshake/intake", async (req, res) => {
         reason: gate.reason,
         captured: "email",
         emailed: emailRes.delivered,
-        emailStatus: { client: null, owner: emailRes },
+        emailStatus: {
+          client: { delivered: false, reason: "fallback-mode" },
+          owner: emailRes,
+        },
       });
     } catch (err2) {
       logger.error({ err: err2 }, "Handshake intake email fallback also failed");
